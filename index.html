@@ -145,6 +145,100 @@
         }
 
 
+        /* --- Water motion effects: flow lines, bubbles, wave divider --- */
+
+        .flow-lines {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .flow-line {
+            fill: none;
+            stroke: rgba(22, 201, 237, 0.4);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-dasharray: 14 20;
+            animation: flowMove linear infinite;
+        }
+
+        .flow-line:nth-child(1) { animation-duration: 5s; }
+        .flow-line:nth-child(2) { stroke: rgba(255, 255, 255, 0.2); animation-duration: 6.5s; }
+        .flow-line:nth-child(3) { animation-duration: 4.2s; }
+        .flow-line:nth-child(4) { stroke: rgba(255, 255, 255, 0.16); animation-duration: 7.5s; }
+        .flow-line:nth-child(5) { animation-duration: 5.6s; }
+
+        @keyframes flowMove {
+            to { stroke-dashoffset: -340; }
+        }
+
+        .bubbles {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubbles span {
+            position: absolute;
+            bottom: -40px;
+            width: var(--size, 12px);
+            height: var(--size, 12px);
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.05));
+            opacity: 0;
+            animation: rise linear infinite;
+        }
+
+        .bubbles span:nth-child(1) { left: 8%;  --size: 9px;  animation-duration: 9s;   animation-delay: 0s; }
+        .bubbles span:nth-child(2) { left: 22%; --size: 15px; animation-duration: 12s;  animation-delay: 2s; }
+        .bubbles span:nth-child(3) { left: 48%; --size: 8px;  animation-duration: 7.5s; animation-delay: 1s; }
+        .bubbles span:nth-child(4) { left: 68%; --size: 13px; animation-duration: 11s;  animation-delay: 4s; }
+        .bubbles span:nth-child(5) { left: 85%; --size: 9px;  animation-duration: 8.5s; animation-delay: 3s; }
+
+        @keyframes rise {
+            0%   { transform: translateY(0) scale(1); opacity: 0; }
+            10%  { opacity: 0.55; }
+            90%  { opacity: 0.35; }
+            100% { transform: translateY(-640px) scale(1.3); opacity: 0; }
+        }
+
+        .wave-divider {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 64px;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 3;
+        }
+
+        .wave-divider svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 204%;
+            height: 100%;
+            animation: waveScroll 16s linear infinite;
+        }
+
+        .wave-divider .wave-back {
+            opacity: 0.5;
+            animation-duration: 22s;
+            animation-direction: reverse;
+        }
+
+        @keyframes waveScroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-49%); }
+        }
+
+
         /* =====================================================
            NAVIGATION
         ===================================================== */
@@ -274,6 +368,16 @@
 
         .hero h1 span {
             color: var(--cyan);
+            background: linear-gradient(90deg, var(--cyan) 20%, #ffffff 50%, var(--cyan) 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: -200% center; }
         }
 
         .hero-subtitle {
@@ -840,6 +944,20 @@
 
 <header>
 
+    <!-- Animated velocity-style flow lines (HEC-RAS-esque) -->
+    <svg class="flow-lines" viewBox="0 0 1200 680" preserveAspectRatio="none" aria-hidden="true">
+        <path class="flow-line" d="M-50,120 C300,80 600,160 1250,110" />
+        <path class="flow-line" d="M-50,240 C300,200 600,280 1250,230" />
+        <path class="flow-line" d="M-50,380 C300,340 600,420 1250,370" />
+        <path class="flow-line" d="M-50,510 C300,470 600,550 1250,500" />
+        <path class="flow-line" d="M-50,610 C300,580 600,640 1250,600" />
+    </svg>
+
+    <!-- Rising bubbles -->
+    <div class="bubbles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
     <div class="header-container">
 
         <nav>
@@ -940,6 +1058,18 @@
 
         </div>
 
+    </div>
+
+    <!-- Wave transition into the next section -->
+    <div class="wave-divider" aria-hidden="true">
+        <svg class="wave-back" viewBox="0 0 2400 60" preserveAspectRatio="none">
+            <path fill="#16c9ed" opacity="0.35"
+                  d="M0,30 C75,10 225,10 300,30 C375,50 525,50 600,30 C675,10 825,10 900,30 C975,50 1125,50 1200,30 C1275,10 1425,10 1500,30 C1575,50 1725,50 1800,30 C1875,10 2025,10 2100,30 C2175,50 2325,50 2400,30 L2400,60 L0,60 Z" />
+        </svg>
+        <svg viewBox="0 0 2400 60" preserveAspectRatio="none">
+            <path fill="#f7fbfd"
+                  d="M0,36 C75,52 225,52 300,36 C375,20 525,20 600,36 C675,52 825,52 900,36 C975,20 1125,20 1200,36 C1275,52 1425,52 1500,36 C1575,20 1725,20 1800,36 C1875,52 2025,52 2100,36 C2175,20 2325,20 2400,36 L2400,60 L0,60 Z" />
+        </svg>
     </div>
 
 </header>
