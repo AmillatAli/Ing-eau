@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#032f56">
 
-    <title>INGÉEAU — Métiers de l'eau</title>
+    <title>INGÉEAU — Formations en métiers de l'eau</title>
 
     <meta name="description"
           content="INGÉEAU — Formations en hydrologie, hydraulique urbaine et hydroinformatique pour les élèves ingénieurs dans les métiers de l'eau.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="INGÉEAU — Formations en métiers de l'eau">
+    <meta property="og:description" content="Formations en hydrologie, hydraulique urbaine et hydroinformatique pour les élèves ingénieurs dans les métiers de l'eau.">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Favicon: simple wave mark, matches the logo -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23032f56'/%3E%3Cpath d='M15 55 Q30 40 50 55 T85 55' stroke='%2316c9ed' stroke-width='9' fill='none' stroke-linecap='round'/%3E%3Cpath d='M15 72 Q30 57 50 72 T85 72' stroke='%23ffffff' stroke-width='7' fill='none' stroke-linecap='round' opacity='0.6'/%3E%3C/svg%3E">
 
     <style>
 
@@ -51,6 +61,17 @@
             scroll-behavior: smooth;
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         body {
             font-family: Arial, Helvetica, sans-serif;
             color: var(--text-dark);
@@ -65,6 +86,29 @@
 
         a {
             text-decoration: none;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--cyan);
+            outline-offset: 3px;
+        }
+
+        /* Skip link for keyboard/screen-reader users */
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 0;
+            background: var(--cyan);
+            color: var(--blue-dark);
+            padding: 12px 20px;
+            font-weight: bold;
+            border-radius: 0 0 10px 0;
+            z-index: 999;
+        }
+
+        .skip-link:focus {
+            left: 0;
         }
 
 
@@ -82,19 +126,21 @@
                     110deg,
                     rgba(1, 43, 79, 0.98) 0%,
                     rgba(2, 73, 117, 0.94) 43%,
-                    rgba(0, 119, 170, 0.55) 100%
+                    rgba(0, 119, 170, 0.75) 100%
                 ),
-                url("images/desalination.jpg");
+                radial-gradient(circle at 85% 20%, rgba(22, 201, 237, 0.35), transparent 45%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cpath d='M0 80 Q50 40 100 80 T200 80 T300 80 T400 80' stroke='%2316c9ed' stroke-width='2' fill='none' opacity='0.25'/%3E%3Cpath d='M0 180 Q50 140 100 180 T200 180 T300 180 T400 180' stroke='%23ffffff' stroke-width='2' fill='none' opacity='0.15'/%3E%3Cpath d='M0 280 Q50 240 100 280 T200 280 T300 280 T400 280' stroke='%2316c9ed' stroke-width='2' fill='none' opacity='0.18'/%3E%3C/svg%3E"),
+                #012b4f;
 
-            background-size: cover;
-            background-position: center;
+            background-size: cover, cover, 400px 400px, cover;
+            background-position: center, center, center, center;
             color: white;
         }
 
         .header-container {
             max-width: 1200px;
             margin: auto;
-            padding: 35px 25px 80px;
+            padding: 25px 25px 80px;
 
             position: relative;
             z-index: 2;
@@ -135,6 +181,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .logo-icon span {
@@ -164,6 +211,54 @@
 
         nav a:hover {
             color: var(--cyan);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            width: 46px;
+            height: 46px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-toggle span,
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 12px;
+            width: 22px;
+            height: 2px;
+            background: white;
+            transition: 0.25s;
+        }
+
+        .nav-toggle span {
+            top: 22px;
+        }
+
+        .nav-toggle span::before {
+            top: -7px;
+        }
+
+        .nav-toggle span::after {
+            top: 7px;
+        }
+
+        .nav-toggle[aria-expanded="true"] span {
+            background: transparent;
+        }
+
+        .nav-toggle[aria-expanded="true"] span::before {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle[aria-expanded="true"] span::after {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
 
@@ -449,26 +544,34 @@
             background: var(--purple);
         }
 
+        /* Course illustrations: CSS-only wave motifs, no external image files needed */
         .course-image {
             min-height: 100%;
-
-            background-size: cover;
+            position: relative;
+            background-repeat: no-repeat;
             background-position: center;
+            background-size: cover;
         }
 
         .hydrologie .course-image {
+            background-color: var(--blue);
             background-image:
-                url("images/hydrologie.jpg");
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 55%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cpath d='M0 60 Q40 30 80 60 T160 60 T240 60 T320 60' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.35'/%3E%3Cpath d='M0 140 Q40 110 80 140 T160 140 T240 140 T320 140' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.25'/%3E%3Cpath d='M0 220 Q40 190 80 220 T160 220 T240 220 T320 220' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.3'/%3E%3C/svg%3E");
         }
 
         .hydraulique .course-image {
+            background-color: var(--green);
             background-image:
-                url("images/Hydraulique.png");
+                radial-gradient(circle at 70% 30%, rgba(255,255,255,0.18), transparent 55%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Ccircle cx='60' cy='60' r='40' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.3'/%3E%3Ccircle cx='200' cy='150' r='55' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.22'/%3E%3Ccircle cx='90' cy='230' r='30' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.3'/%3E%3C/svg%3E");
         }
 
         .hydroinfo .course-image {
+            background-color: var(--purple);
             background-image:
-                url("images/Hydroinformatique.png");
+                radial-gradient(circle at 30% 70%, rgba(255,255,255,0.18), transparent 55%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cline x1='0' y1='0' x2='300' y2='300' stroke='%23ffffff' stroke-width='2' opacity='0.15'/%3E%3Cline x1='0' y1='75' x2='225' y2='300' stroke='%23ffffff' stroke-width='2' opacity='0.12'/%3E%3Cline x1='75' y1='0' x2='300' y2='225' stroke='%23ffffff' stroke-width='2' opacity='0.12'/%3E%3Crect x='110' y='110' width='80' height='80' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.3'/%3E%3C/svg%3E");
         }
 
 
@@ -621,8 +724,35 @@
 
         @media(max-width: 900px) {
 
+            .nav-toggle {
+                display: block;
+            }
+
             nav ul {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+
+                flex-direction: column;
+                gap: 0;
+
+                background: rgba(1, 30, 55, 0.98);
+                padding: 10px 25px 20px;
+            }
+
+            nav ul.open {
+                display: flex;
+            }
+
+            nav ul li {
+                border-top: 1px solid rgba(255,255,255,.12);
+            }
+
+            nav ul a {
+                display: block;
+                padding: 16px 5px;
             }
 
             .hero {
@@ -634,7 +764,7 @@
             }
 
             .course-image {
-                min-height: 250px;
+                min-height: 200px;
                 order: -1;
             }
 
@@ -659,7 +789,7 @@
             }
 
             .header-container {
-                padding: 25px 18px 60px;
+                padding: 20px 18px 60px;
             }
 
             .logo {
@@ -716,6 +846,7 @@
 
 <body>
 
+<a class="skip-link" href="#main">Aller au contenu</a>
 
 <!-- =========================================================
      HEADER
@@ -739,7 +870,11 @@
 
             </div>
 
-            <ul>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu">
+                <span></span>
+            </button>
+
+            <ul id="navMenu">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#parcours">Parcours</a></li>
                 <li><a href="#avantages">Pourquoi ?</a></li>
@@ -787,7 +922,7 @@
                 <h2>Votre intervenant</h2>
 
                 <div class="profile-item">
-                    <div class="profile-icon">👨‍💧</div>
+                    <div class="profile-icon" aria-hidden="true">👨‍💧</div>
 
                     <div>
                         <strong>Ingénieur hydraulicien</strong>
@@ -795,7 +930,7 @@
                 </div>
 
                 <div class="profile-item">
-                    <div class="profile-icon">🎓</div>
+                    <div class="profile-icon" aria-hidden="true">🎓</div>
 
                     <div>
                         <strong>Lauréat du Master HYDROPROTECH</strong>
@@ -803,7 +938,7 @@
                 </div>
 
                 <div class="profile-item">
-                    <div class="profile-icon">🌊</div>
+                    <div class="profile-icon" aria-hidden="true">🌊</div>
 
                     <div>
                         Doctorant en hydroinformatique appliquée
@@ -823,6 +958,8 @@
 
 </header>
 
+
+<main id="main">
 
 <!-- =========================================================
      PARCOURS
@@ -890,7 +1027,7 @@
 
                 </div>
 
-                <div class="course-image"></div>
+                <div class="course-image" role="img" aria-label="Illustration du parcours hydrologie"></div>
 
             </article>
 
@@ -952,7 +1089,7 @@
 
                 </div>
 
-                <div class="course-image"></div>
+                <div class="course-image" role="img" aria-label="Illustration du parcours hydraulique urbaine"></div>
 
             </article>
 
@@ -1003,7 +1140,7 @@
 
                 </div>
 
-                <div class="course-image"></div>
+                <div class="course-image" role="img" aria-label="Illustration du parcours hydroinformatique"></div>
 
             </article>
 
@@ -1092,7 +1229,7 @@
 
             <div class="advantage">
 
-                <div class="advantage-icon">
+                <div class="advantage-icon" aria-hidden="true">
                     🎯
                 </div>
 
@@ -1110,7 +1247,7 @@
 
             <div class="advantage">
 
-                <div class="advantage-icon">
+                <div class="advantage-icon" aria-hidden="true">
                     🧠
                 </div>
 
@@ -1128,7 +1265,7 @@
 
             <div class="advantage">
 
-                <div class="advantage-icon">
+                <div class="advantage-icon" aria-hidden="true">
                     💻
                 </div>
 
@@ -1146,7 +1283,7 @@
 
             <div class="advantage">
 
-                <div class="advantage-icon">
+                <div class="advantage-icon" aria-hidden="true">
                     👨‍🏫
                 </div>
 
@@ -1204,7 +1341,7 @@
                     href="mailto:ingeeau@outlook.com"
                 >
 
-                    📧
+                    <span aria-hidden="true">📧</span>
 
                     <span>
                         <strong>Email</strong><br>
@@ -1218,9 +1355,10 @@
                     class="contact-link"
                     href="https://wa.me/33744833036"
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
 
-                    📱
+                    <span aria-hidden="true">📱</span>
 
                     <span>
                         <strong>WhatsApp</strong><br>
@@ -1237,6 +1375,8 @@
 
 </section>
 
+</main>
+
 
 <!-- =========================================================
      FOOTER
@@ -1245,7 +1385,7 @@
 <footer>
 
     <p>
-        © 2026 INGÉEAU — Formation & ingénierie de l'eau
+        © <span id="year">2026</span> INGÉEAU — Formation & ingénierie de l'eau
     </p>
 
     <p style="margin-top:5px;">
@@ -1254,6 +1394,29 @@
 
 </footer>
 
+
+<script>
+    // Mobile navigation toggle
+    (function () {
+        var toggle = document.getElementById('navToggle');
+        var menu = document.getElementById('navMenu');
+
+        toggle.addEventListener('click', function () {
+            var open = menu.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+
+        menu.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                menu.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    })();
+
+    // Footer year, always current
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
