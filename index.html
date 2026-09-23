@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INGÉEAU — Métiers de l'eau</title>
+
+    <meta name="description"
+          content="INGÉEAU — Formations en hydrologie, hydraulique urbaine et hydroinformatique pour les élèves ingénieurs dans les métiers de l'eau.">
+
+    <style>
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+            --blue-dark: #032f56;
+            --blue: #087fc1;
+            --cyan: #16c9ed;
+            --cyan-light: #e8f9ff;
+
+            --green: #07934b;
+            --green-light: #ecfaf2;
+
+            --purple: #6224b5;
+            --purple-light: #f5efff;
+
+            --white: #ffffff;
+            --text: #083b70;
+            --text-dark: #172f45;
+
+            --shadow: 0 10px 30px rgba(0, 45, 80, 0.12);
+
+            --radius: 22px;
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text-dark);
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            min-height: 680px;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    rgba(1, 43, 79, 0.98) 0%,
+                    rgba(2, 73, 117, 0.94) 43%,
+                    rgba(0, 119, 170, 0.55) 100%
+                ),
+                url("images/desalination.jpg");
+
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 25px 80px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+
+            background: var(--cyan);
+
+            border-radius: 50% 50% 50% 5px;
+
+            transform: rotate(-45deg);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon span {
+            transform: rotate(45deg);
+            font-size: 25px;
+        }
+
+        .logo .inge {
+            color: white;
+        }
+
+        .logo .eau {
+            color: var(--cyan);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--cyan);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--cyan);
+        }
+
+        .hero-subtitle {
+            font-size: 27px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .slogan {
+            font-size: 25px;
+            font-style: italic;
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--blue-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 200, 240, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--blue-dark);
+        }
+
+
+        /* =====================================================
+           PROFIL
+        ===================================================== */
+
+        .profile {
+            background: rgba(2, 47, 82, 0.88);
+            border: 1px solid rgba(255,255,255,.25);
+
+            border-radius: 30px;
+            padding: 35px;
+
+            backdrop-filter: blur(8px);
+
+            box-shadow: var(--shadow);
+        }
+
+        .profile h2 {
+            color: var(--cyan);
+            margin-bottom: 20px;
+        }
+
+        .profile-item {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .profile-icon {
+            font-size: 25px;
+        }
+
+
+        /* =====================================================
+           SECTION GENERAL
+        ===================================================== */
+
+        section {
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            color: var(--blue-dark);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #60778a;
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           PARCOURS
+        ===================================================== */
+
+        #parcours {
+            background: #f7fbfd;
+        }
+
+        .courses {
+            display: grid;
+            gap: 30px;
+        }
+
+        .course {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+
+            display: grid;
+            grid-template-columns: 1fr 350px;
+
+            transition: 0.3s;
+        }
+
+        .course:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-content {
+            padding: 35px;
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .course-title {
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .hours {
+            padding: 10px 20px;
+            border-radius: 30px;
+
+            color: white;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .course-description {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #547083;
+        }
+
+        .course-list {
+            list-style: none;
+            counter-reset: courses;
+        }
+
+        .course-list li {
+            counter-increment: courses;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+
+            margin: 15px 0;
+
+            font-size: 17px;
+        }
+
+        .course-list li::before {
+            content: counter(courses);
+
+            min-width: 30px;
+            height: 30px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-weight: bold;
+        }
+
+
+        /* HYDROLOGIE */
+
+        .hydrologie {
+            border-left: 8px solid var(--blue);
+        }
+
+        .hydrologie .course-title {
+            color: var(--blue);
+        }
+
+        .hydrologie .hours {
+            background: var(--blue);
+        }
+
+        .hydrologie .course-list li::before {
+            background: var(--blue);
+        }
+
+
+        /* HYDRAULIQUE */
+
+        .hydraulique {
+            border-left: 8px solid var(--green);
+        }
+
+        .hydraulique .course-title {
+            color: var(--green);
+        }
+
+        .hydraulique .hours {
+            background: var(--green);
+        }
+
+        .hydraulique .course-list li::before {
+            background: var(--green);
+        }
+
+
+        /* HYDROINFORMATIQUE */
+
+        .hydroinfo {
+            border-left: 8px solid var(--purple);
+        }
+
+        .hydroinfo .course-title {
+            color: var(--purple);
+        }
+
+        .hydroinfo .hours {
+            background: var(--purple);
+        }
+
+        .hydroinfo .course-list li::before {
+            background: var(--purple);
+        }
+
+        .course-image {
+            min-height: 100%;
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hydrologie .course-image {
+            background-image:
+                url("images/hydrologie.jpg");
+        }
+
+        .hydraulique .course-image {
+            background-image:
+                url("images/hydraulique.jpg");
+        }
+
+        .hydroinfo .course-image {
+            background-image:
+                url("images/hydroinformatique.jpg");
+        }
+
+
+        /* =====================================================
+           SEANCE GRATUITE
+        ===================================================== */
+
+        .free-session {
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--cyan),
+                    #008ed0
+                );
+
+            color: white;
+
+            border-radius: 30px;
+
+            padding: 45px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+
+            align-items: center;
+        }
+
+        .free-session h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .free-session p {
+            font-size: 18px;
+        }
+
+        .evaluation {
+            background: rgba(255,255,255,.15);
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .evaluation strong {
+            color: white;
+        }
+
+
+        /* =====================================================
+           POURQUOI
+        ===================================================== */
+
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .advantage {
+            text-align: center;
+            padding: 30px 20px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .advantage-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .advantage h3 {
+            color: var(--blue-dark);
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ===================================================== */
+
+        #contact {
+            background: var(--blue-dark);
+            color: white;
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact h2 {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            color: white;
+
+            padding: 18px 20px;
+
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 15px;
+
+            transition: .3s;
+        }
+
+        .contact-link:hover {
+            background: rgba(255,255,255,.1);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            background: #021e38;
+            color: #a9c4d8;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width: 900px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .course {
+                grid-template-columns: 1fr;
+            }
+
+            .course-image {
+                min-height: 250px;
+                order: -1;
+            }
+
+            .advantages {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .free-session {
+                grid-template-columns: 1fr;
+            }
+
+            .contact {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media(max-width: 600px) {
+
+            header {
+                min-height: auto;
+            }
+
+            .header-container {
+                padding: 25px 18px 60px;
+            }
+
+            .logo {
+                font-size: 32px;
+            }
+
+            .logo-icon {
+                width: 42px;
+                height: 42px;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .slogan {
+                font-size: 20px;
+            }
+
+            section {
+                padding: 55px 15px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .course-content {
+                padding: 25px 20px;
+            }
+
+            .course-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .advantages {
+                grid-template-columns: 1fr;
+            }
+
+            .contact h2 {
+                font-size: 35px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+    <div class="header-container">
+
+        <nav>
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    <span>≈</span>
+                </div>
+
+                <div>
+                    <span class="inge">INGÉ</span><span class="eau">EAU</span>
+                </div>
+
+            </div>
+
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#avantages">Pourquoi ?</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+        </nav>
+
+
+        <div class="hero" id="accueil">
+
+            <div>
+
+                <div class="hero-subtitle">
+                    AU SERVICE DES ÉLÈVES INGÉNIEURS
+                    DANS LES MÉTIERS DE L’EAU
+                </div>
+
+                <h1>
+                    INGÉ<span>EAU</span>
+                </h1>
+
+                <div class="slogan">
+                    « Apprendre aujourd’hui,<br>
+                    gérer les défis de l’eau demain »
+                </div>
+
+                <div class="hero-buttons">
+
+                    <a href="#parcours" class="btn btn-primary">
+                        Découvrir les parcours
+                    </a>
+
+                    <a href="#contact" class="btn btn-outline">
+                        Nous contacter
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile">
+
+                <h2>Votre intervenant</h2>
+
+                <div class="profile-item">
+                    <div class="profile-icon">👨‍💧</div>
+
+                    <div>
+                        <strong>Ingénieur hydraulicien</strong>
+                    </div>
+                </div>
+
+                <div class="profile-item">
+                    <div class="profile-icon">🎓</div>
+
+                    <div>
+                        <strong>Lauréat du Master HYDROPROTECH</strong>
+                    </div>
+                </div>
+
+                <div class="profile-item">
+                    <div class="profile-icon">🌊</div>
+
+                    <div>
+                        Doctorant en hydroinformatique appliquée
+                        au dessalement de l’eau de mer
+                    </div>
+                </div>
+
+                <p style="margin-top:25px;font-style:italic;">
+                    « De la théorie à la pratique… »
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     PARCOURS
+========================================================= -->
+
+<section id="parcours">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Nos parcours de formation</h2>
+
+            <p>
+                Des formations structurées autour des principaux
+                métiers de l’ingénierie de l’eau.
+            </p>
+
+        </div>
+
+
+        <div class="courses">
+
+
+            <!-- HYDROLOGIE -->
+
+            <article class="course hydrologie">
+
+                <div class="course-content">
+
+                    <div class="course-header">
+
+                        <div class="course-title">
+                            PARCOURS HYDROLOGIE
+                        </div>
+
+                        <div class="hours">
+                            60 h
+                        </div>
+
+                    </div>
+
+                    <div class="course-description">
+                        Comprendre, modéliser et anticiper
+                        les ressources en eau
+                    </div>
+
+                    <ol class="course-list">
+
+                        <li>SIG</li>
+
+                        <li>
+                            Hydrologie de l’ingénieur
+                        </li>
+
+                        <li>
+                            Modélisation hydrologique
+                        </li>
+
+                        <li>
+                            Modélisation hydrodynamique
+                        </li>
+
+                    </ol>
+
+                </div>
+
+                <div class="course-image"></div>
+
+            </article>
+
+
+            <!-- HYDRAULIQUE URBAINE -->
+
+            <article class="course hydraulique">
+
+                <div class="course-content">
+
+                    <div class="course-header">
+
+                        <div class="course-title">
+                            PARCOURS HYDRAULIQUE URBAINE
+                        </div>
+
+                        <div class="hours">
+                            72 h
+                        </div>
+
+                    </div>
+
+                    <div class="course-description">
+                        Concevoir et modéliser des réseaux
+                        d’eau durables et performants
+                    </div>
+
+                    <ol class="course-list">
+
+                        <li>
+                            Hydraulique générale
+                        </li>
+
+                        <li>
+                            Hydraulique à surface libre
+                        </li>
+
+                        <li>
+                            Alimentation en eau potable —
+                            conception et dimensionnement
+                        </li>
+
+                        <li>
+                            Assainissement eaux usées et eaux
+                            pluviales — conception et dimensionnement
+                        </li>
+
+                        <li>
+                            Modélisation AEP —
+                            EPANET & QGISRED
+                        </li>
+
+                        <li>
+                            Modélisation assainissement —
+                            SWMM
+                        </li>
+
+                    </ol>
+
+                </div>
+
+                <div class="course-image"></div>
+
+            </article>
+
+
+            <!-- HYDROINFORMATIQUE -->
+
+            <article class="course hydroinfo">
+
+                <div class="course-content">
+
+                    <div class="course-header">
+
+                        <div class="course-title">
+                            PARCOURS HYDROINFORMATIQUE
+                        </div>
+
+                        <div class="hours">
+                            72 h
+                        </div>
+
+                    </div>
+
+                    <div class="course-description">
+                        Des outils numériques pour une gestion
+                        intelligente de l’eau
+                    </div>
+
+                    <ol class="course-list">
+
+                        <li>
+                            Initiation à la programmation
+                            et à l’algorithmique
+                        </li>
+
+                        <li>
+                            Programmation avancée avec Python
+                        </li>
+
+                        <li>
+                            IA & Science de la donnée
+                        </li>
+
+                        <li>
+                            Hydroinformatique avancée
+                        </li>
+
+                    </ol>
+
+                </div>
+
+                <div class="course-image"></div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PREMIERE SEANCE
+========================================================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="free-session">
+
+            <div>
+
+                <h2>
+                    🎁 Première séance gratuite !
+                </h2>
+
+                <p>
+                    Venez découvrir notre méthode de travail
+                    sans engagement.
+                </p>
+
+            </div>
+
+
+            <div class="evaluation">
+
+                <h3>
+                    Évaluation initiale
+                </h3>
+
+                <p>
+                    La première séance inclut une évaluation
+                    permettant d’identifier votre niveau,
+                    vos besoins et vos objectifs.
+                </p>
+
+                <p style="margin-top:15px;">
+                    <strong>
+                        Objectif : proposer un apprentissage
+                        ciblé et adapté à chaque étudiant.
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     AVANTAGES
+========================================================= -->
+
+<section id="avantages">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Pourquoi suivre ces formations ?
+            </h2>
+
+            <p>
+                Une approche orientée compétences et projets.
+            </p>
+
+        </div>
+
+
+        <div class="advantages">
+
+            <div class="advantage">
+
+                <div class="advantage-icon">
+                    🎯
+                </div>
+
+                <h3>
+                    Formation ciblée
+                </h3>
+
+                <p>
+                    Un apprentissage adapté à votre niveau
+                    et à vos objectifs.
+                </p>
+
+            </div>
+
+
+            <div class="advantage">
+
+                <div class="advantage-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    Compétences
+                </h3>
+
+                <p>
+                    Renforcez vos compétences techniques
+                    dans les métiers de l'eau.
+                </p>
+
+            </div>
+
+
+            <div class="advantage">
+
+                <div class="advantage-icon">
+                    💻
+                </div>
+
+                <h3>
+                    Outils professionnels
+                </h3>
+
+                <p>
+                    Python, SIG, EPANET, SWMM,
+                    modélisation et données.
+                </p>
+
+            </div>
+
+
+            <div class="advantage">
+
+                <div class="advantage-icon">
+                    👨‍🏫
+                </div>
+
+                <h3>
+                    Accompagnement
+                </h3>
+
+                <p>
+                    Un suivi personnalisé tout au long
+                    de votre parcours.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section id="contact">
+
+    <div class="container">
+
+        <div class="contact">
+
+            <div>
+
+                <h2>
+                    Construisons ensemble
+                    votre parcours.
+                </h2>
+
+                <p>
+                    Vous souhaitez obtenir plus d'informations
+                    sur les formations ?
+                </p>
+
+                <p>
+                    Contactez-nous directement.
+                </p>
+
+            </div>
+
+
+            <div class="contact-info">
+
+                <a
+                    class="contact-link"
+                    href="mailto:ingeeau@outlook.com"
+                >
+
+                    📧
+
+                    <span>
+                        <strong>Email</strong><br>
+                        ingeeau@outlook.com
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="contact-link"
+                    href="https://wa.me/33744833036"
+                    target="_blank"
+                >
+
+                    📱
+
+                    <span>
+                        <strong>WhatsApp</strong><br>
+                        +33 7 44 83 30 36
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <p>
+        © 2026 INGÉEAU — Formation & ingénierie de l'eau
+    </p>
+
+    <p style="margin-top:5px;">
+        « De la théorie à la pratique »
+    </p>
+
+</footer>
+
+
+</body>
+</html>
