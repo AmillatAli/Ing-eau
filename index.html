@@ -113,6 +113,22 @@
 
 
         /* =====================================================
+           ICÔNES SVG
+        ===================================================== */
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
            HEADER
         ===================================================== */
 
@@ -453,10 +469,23 @@
             display: flex;
             gap: 15px;
             margin: 20px 0;
+            align-items: flex-start;
         }
 
         .profile-icon {
-            font-size: 25px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .profile-icon .icon {
+            width: 24px;
+            height: 24px;
         }
 
 
@@ -503,6 +532,7 @@
             gap: 30px;
         }
 
+        /* La carte entière est un lien vers la page du parcours */
         .course {
             background: white;
             border-radius: var(--radius);
@@ -512,11 +542,18 @@
             display: grid;
             grid-template-columns: 1fr 350px;
 
-            transition: 0.3s;
+            color: inherit;
+            transition: transform .3s, box-shadow .3s;
         }
 
         .course:hover {
             transform: translateY(-5px);
+            box-shadow: 0 18px 42px rgba(0, 45, 80, 0.18);
+        }
+
+        .course:focus-visible {
+            outline: 3px solid var(--cyan);
+            outline-offset: 4px;
         }
 
         .course-content {
@@ -529,6 +566,7 @@
             align-items: center;
 
             margin-bottom: 25px;
+            gap: 15px;
         }
 
         .course-title {
@@ -543,6 +581,7 @@
             color: white;
             font-weight: 900;
             font-size: 18px;
+            white-space: nowrap;
         }
 
         .course-description {
@@ -584,6 +623,30 @@
             font-weight: bold;
         }
 
+        /* Appel à l'action de la carte */
+        .course-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            margin-top: 26px;
+
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .course-cta .icon {
+            width: 18px;
+            height: 18px;
+            transition: transform .3s;
+        }
+
+        .course:hover .course-cta .icon {
+            transform: translateX(5px);
+        }
+
 
         /* HYDROLOGIE */
 
@@ -591,14 +654,12 @@
             border-left: 8px solid var(--blue);
         }
 
-        .hydrologie .course-title {
+        .hydrologie .course-title,
+        .hydrologie .course-cta {
             color: var(--blue);
         }
 
-        .hydrologie .hours {
-            background: var(--blue);
-        }
-
+        .hydrologie .hours,
         .hydrologie .course-list li::before {
             background: var(--blue);
         }
@@ -610,14 +671,12 @@
             border-left: 8px solid var(--green);
         }
 
-        .hydraulique .course-title {
+        .hydraulique .course-title,
+        .hydraulique .course-cta {
             color: var(--green);
         }
 
-        .hydraulique .hours {
-            background: var(--green);
-        }
-
+        .hydraulique .hours,
         .hydraulique .course-list li::before {
             background: var(--green);
         }
@@ -629,14 +688,12 @@
             border-left: 8px solid var(--purple);
         }
 
-        .hydroinfo .course-title {
+        .hydroinfo .course-title,
+        .hydroinfo .course-cta {
             color: var(--purple);
         }
 
-        .hydroinfo .hours {
-            background: var(--purple);
-        }
-
+        .hydroinfo .hours,
         .hydroinfo .course-list li::before {
             background: var(--purple);
         }
@@ -690,9 +747,20 @@
             align-items: center;
         }
 
-        .free-session h2 {
+        .free-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
             font-size: 35px;
             margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .free-title .icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
         }
 
         .free-session p {
@@ -703,6 +771,18 @@
             background: rgba(255,255,255,.15);
             padding: 25px;
             border-radius: 20px;
+        }
+
+        .evaluation h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .evaluation h3 .icon {
+            width: 22px;
+            height: 22px;
         }
 
         .evaluation strong {
@@ -732,8 +812,41 @@
         }
 
         .advantage-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
+            width: 62px;
+            height: 62px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .advantage-icon .icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .advantage:nth-child(1) .advantage-icon {
+            background: var(--cyan-light);
+            color: var(--blue);
+        }
+
+        .advantage:nth-child(2) .advantage-icon {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .advantage:nth-child(3) .advantage-icon {
+            background: var(--purple-light);
+            color: var(--purple);
+        }
+
+        .advantage:nth-child(4) .advantage-icon {
+            background: #eaf2fb;
+            color: var(--blue-dark);
         }
 
         .advantage h3 {
@@ -789,8 +902,15 @@
             transition: .3s;
         }
 
+        .contact-link .icon {
+            width: 24px;
+            height: 24px;
+            color: var(--cyan);
+        }
+
         .contact-link:hover {
             background: rgba(255,255,255,.1);
+            border-color: rgba(22, 201, 237, .5);
         }
 
 
@@ -928,6 +1048,14 @@
             .contact h2 {
                 font-size: 35px;
             }
+
+            .free-session {
+                padding: 30px 22px;
+            }
+
+            .free-title {
+                font-size: 26px;
+            }
         }
 
     </style>
@@ -1026,28 +1154,55 @@
                 <h2>Votre intervenant</h2>
 
                 <div class="profile-item">
-                    <div class="profile-icon" aria-hidden="true">👷🏻‍♂️⚙️</div>
+
+                    <div class="profile-icon" aria-hidden="true">
+                        <!-- Casque de chantier -->
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M3.5 17.5h17"/>
+                            <path d="M5.8 17.5v-2.2a6.2 6.2 0 0 1 12.4 0v2.2"/>
+                            <path d="M9.9 5.6v4.1M14.1 5.6v4.1"/>
+                            <path d="M12 4.2a7.6 7.6 0 0 0-1.4.1M12 4.2a7.6 7.6 0 0 1 1.4.1"/>
+                        </svg>
+                    </div>
 
                     <div>
-                        <strong>Ingénieur en Hydraulique & Infrastuctures</strong>
+                        <strong>Ingénieur en Hydraulique &amp; Infrastructures</strong>
                     </div>
+
                 </div>
 
                 <div class="profile-item">
-                    <div class="profile-icon" aria-hidden="true">🎓</div>
+
+                    <div class="profile-icon" aria-hidden="true">
+                        <!-- Chapeau de diplômé -->
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 4L2.5 8.6 12 13.2l9.5-4.6L12 4z"/>
+                            <path d="M6.2 10.7v4.1c0 1.6 2.6 2.8 5.8 2.8s5.8-1.2 5.8-2.8v-4.1"/>
+                            <path d="M21.5 8.6v5"/>
+                        </svg>
+                    </div>
 
                     <div>
                         <strong>Lauréat du Master HYDROPROTECH</strong>
                     </div>
+
                 </div>
 
                 <div class="profile-item">
-                    <div class="profile-icon" aria-hidden="true">🌊</div>
+
+                    <div class="profile-icon" aria-hidden="true">
+                        <!-- Goutte d'eau -->
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 3.2c3.3 3.6 5.6 6.5 5.6 9.3a5.6 5.6 0 0 1-11.2 0c0-2.8 2.3-5.7 5.6-9.3z"/>
+                            <path d="M9.4 12.6a2.7 2.7 0 0 0 2.3 2.9"/>
+                        </svg>
+                    </div>
 
                     <div>
                         Doctorant en hydroinformatique appliquée
                         au dessalement de l’eau de mer
                     </div>
+
                 </div>
 
                 <p style="margin-top:25px;font-style:italic;">
@@ -1102,7 +1257,9 @@
 
             <!-- HYDROLOGIE -->
 
-            <article class="course hydrologie">
+            <a class="course hydrologie"
+               href="parcours-hydrologie.html"
+               aria-label="Parcours Hydrologie, 60 heures — voir le programme détaillé">
 
                 <div class="course-content">
 
@@ -1141,16 +1298,26 @@
 
                     </ol>
 
+                    <span class="course-cta">
+                        Découvrir le programme
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 12h15"/>
+                            <path d="M13.5 6.5L20 12l-6.5 5.5"/>
+                        </svg>
+                    </span>
+
                 </div>
 
                 <div class="course-image" role="img" aria-label="Illustration du parcours hydrologie"></div>
 
-            </article>
+            </a>
 
 
             <!-- HYDRAULIQUE URBAINE -->
 
-            <article class="course hydraulique">
+            <a class="course hydraulique"
+               href="parcours-hydraulique-urbaine.html"
+               aria-label="Parcours Hydraulique urbaine, 72 heures — voir le programme détaillé">
 
                 <div class="course-content">
 
@@ -1193,7 +1360,7 @@
 
                         <li>
                             Modélisation AEP —
-                            EPANET & QGISRED
+                            EPANET &amp; QGISRED
                         </li>
 
                         <li>
@@ -1203,16 +1370,26 @@
 
                     </ol>
 
+                    <span class="course-cta">
+                        Découvrir le programme
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 12h15"/>
+                            <path d="M13.5 6.5L20 12l-6.5 5.5"/>
+                        </svg>
+                    </span>
+
                 </div>
 
                 <div class="course-image" role="img" aria-label="Illustration du parcours hydraulique urbaine"></div>
 
-            </article>
+            </a>
 
 
             <!-- HYDROINFORMATIQUE -->
 
-            <article class="course hydroinfo">
+            <a class="course hydroinfo"
+               href="parcours-hydroinformatique.html"
+               aria-label="Parcours Hydroinformatique, 72 heures — voir le programme détaillé">
 
                 <div class="course-content">
 
@@ -1245,7 +1422,7 @@
                         </li>
 
                         <li>
-                            IA & Science de la donnée
+                            IA &amp; Science de la donnée
                         </li>
 
                         <li>
@@ -1254,11 +1431,19 @@
 
                     </ol>
 
+                    <span class="course-cta">
+                        Découvrir le programme
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 12h15"/>
+                            <path d="M13.5 6.5L20 12l-6.5 5.5"/>
+                        </svg>
+                    </span>
+
                 </div>
 
                 <div class="course-image" role="img" aria-label="Illustration du parcours hydroinformatique"></div>
 
-            </article>
+            </a>
 
 
         </div>
@@ -1280,8 +1465,18 @@
 
             <div>
 
-                <h2>
-                    🎁 Première séance gratuite !
+                <h2 class="free-title">
+
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="8.6" width="18" height="11.9" rx="2"/>
+                        <path d="M3 12.8h18"/>
+                        <path d="M12 8.6v11.9"/>
+                        <path d="M12 8.6S10.6 4 8.2 4a2.3 2.3 0 0 0 0 4.6H12z"/>
+                        <path d="M12 8.6S13.4 4 15.8 4a2.3 2.3 0 0 1 0 4.6H12z"/>
+                    </svg>
+
+                    Première séance gratuite
+
                 </h2>
 
                 <p>
@@ -1295,13 +1490,16 @@
             <div class="evaluation">
 
                 <h3>
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M8 3.5h8a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5H8A1.5 1.5 0 0 1 6.5 19V5A1.5 1.5 0 0 1 8 3.5z"/>
+                        <path d="M9.5 8.5h5M9.5 12h5M9.5 15.5h3"/>
+                    </svg>
                     Petit test de connaissances
                 </h3>
 
                 <p>
-                    La première séance 
-                    inclue à sa fin un test de connaissances afin d’identifier votre niveau,
-                    vos besoins et vos objectifs.
+                    La première séance inclut à sa fin un test de connaissances
+                    afin d’identifier votre niveau, vos besoins et vos objectifs.
                 </p>
 
                 <p style="margin-top:15px;">
@@ -1346,7 +1544,12 @@
             <div class="advantage">
 
                 <div class="advantage-icon" aria-hidden="true">
-                    🎯
+                    <!-- Cible -->
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="8.5"/>
+                        <circle cx="12" cy="12" r="4.4"/>
+                        <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
                 </div>
 
                 <h3>
@@ -1364,7 +1567,11 @@
             <div class="advantage">
 
                 <div class="advantage-icon" aria-hidden="true">
-                    🧠
+                    <!-- Médaille -->
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="9.4" r="5.4"/>
+                        <path d="M8.6 14.1L7 21l5-2.6 5 2.6-1.6-6.9"/>
+                    </svg>
                 </div>
 
                 <h3>
@@ -1382,7 +1589,12 @@
             <div class="advantage">
 
                 <div class="advantage-icon" aria-hidden="true">
-                    💻
+                    <!-- Écran / logiciels -->
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <rect x="2.5" y="4" width="19" height="12.4" rx="2"/>
+                        <path d="M9 20.4h6M12 16.4v4"/>
+                        <path d="M9.6 8.6L7.6 10.4l2 1.8M14.4 8.6l2 1.8-2 1.8"/>
+                    </svg>
                 </div>
 
                 <h3>
@@ -1391,7 +1603,7 @@
 
                 <p>
                     Python, SIG, EPANET, SWMM,
-                    Telamac 2D, HECRAS, HECHMS...
+                    TELEMAC 2D, HEC-RAS, HEC-HMS…
                 </p>
 
             </div>
@@ -1400,7 +1612,11 @@
             <div class="advantage">
 
                 <div class="advantage-icon" aria-hidden="true">
-                    👨‍🏫
+                    <!-- Accompagnement -->
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="3.8"/>
+                        <path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>
+                    </svg>
                 </div>
 
                 <h3>
@@ -1457,7 +1673,10 @@
                     href="mailto:ingeeau@outlook.com"
                 >
 
-                    <span aria-hidden="true">📧</span>
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="2.5" y="4.8" width="19" height="14.4" rx="2.4"/>
+                        <path d="M3.4 6.4L12 12.8l8.6-6.4"/>
+                    </svg>
 
                     <span>
                         <strong>Email</strong><br>
@@ -1474,7 +1693,10 @@
                     rel="noopener noreferrer"
                 >
 
-                    <span aria-hidden="true">📱</span>
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="6.4" y="2.4" width="11.2" height="19.2" rx="2.6"/>
+                        <path d="M10.4 18.6h3.2"/>
+                    </svg>
 
                     <span>
                         <strong>WhatsApp</strong><br>
@@ -1501,7 +1723,7 @@
 <footer>
 
     <p>
-        © <span id="year">2026</span> INGÉEAU — Formation & ingénierie de l'eau
+        © <span id="year">2026</span> INGÉEAU — Formation &amp; ingénierie de l'eau
     </p>
 
     <p style="margin-top:5px;">
