@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#032f56">
+    <title>Parcours Hydraulique urbaine — INGÉEAU</title>
+    <meta name="description" content="Parcours Hydraulique urbaine INGÉEAU : concevoir et modéliser des réseaux d'eau durables et performants. 72 heures de formation pour élèves ingénieurs.">
+    <link rel="icon" type="image/png" href="images/ingeeau-logoo.png">
+    <style>
+        :root {
+            --blue-dark: #032f56;
+            --cyan: #16c9ed;
+            --text-dark: #172f45;
+            --shadow: 0 10px 30px rgba(0,45,80,.12);
+            --radius: 22px;
+            --accent: #07934b;
+            --accent-light: #ecfaf2;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text-dark);
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+        .icon {
+            width: 24px; height: 24px;
+            fill: none; stroke: currentColor; stroke-width: 1.7;
+            stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* ===== HERO ===== */
+        .page-hero {
+            position: relative; color: white;
+            padding: 25px 20px 80px;
+            background:
+                linear-gradient(120deg, rgba(1,43,79,.95) 0%, rgba(2,73,117,.88) 55%, rgba(7,147,75,.55) 100%),
+                url("images/Hydraulique.png");
+            background-size: cover; background-position: center; overflow: hidden;
+        }
+
+        .page-hero::after {
+            content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
+            height: 60px; background: #fff;
+            clip-path: ellipse(75% 100% at 50% 100%); z-index: 1;
+        }
+
+        .page-hero .container {
+            max-width: 1200px; margin: auto;
+            position: relative; z-index: 2;
+        }
+
+        .page-hero nav {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 55px; flex-wrap: wrap; gap: 15px;
+        }
+
+        .page-hero .logo {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 36px; font-weight: 900; letter-spacing: -1.5px;
+        }
+
+        .page-hero .logo-icon { width: 42px; height: 42px; }
+        .page-hero .logo .inge { color: white; }
+        .page-hero .logo .eau { color: var(--cyan); }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: rgba(255,255,255,.85); font-weight: bold; font-size: 15px;
+            transition: color .3s;
+        }
+        .back-link:hover { color: var(--cyan); }
+        .back-link .icon { width: 18px; height: 18px; }
+
+        .hero-body {
+            display: grid; grid-template-columns: 1.25fr .75fr;
+            gap: 45px; align-items: center;
+        }
+
+        .tag {
+            display: inline-block; padding: 6px 14px;
+            border-radius: 30px; background: var(--accent); color: white;
+            font-size: 12px; font-weight: 900; letter-spacing: .1em;
+            text-transform: uppercase; margin-bottom: 16px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.05; margin-bottom: 14px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 20px; font-style: italic;
+            color: rgba(255,255,255,.85);
+            margin-bottom: 28px; max-width: 560px;
+        }
+
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        .btn-primary, .btn-outline {
+            display: inline-block; padding: 14px 26px;
+            border-radius: 50px; font-weight: 900; font-size: 15px; transition: .3s;
+        }
+
+        .btn-primary { background: var(--cyan); color: var(--blue-dark); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(22,201,237,.4); }
+        .btn-outline { border: 2px solid white; color: white; }
+        .btn-outline:hover { background: white; color: var(--blue-dark); }
+
+        .fiche {
+            background: rgba(2,47,82,.85);
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 24px; padding: 28px 26px;
+            backdrop-filter: blur(8px); box-shadow: var(--shadow);
+        }
+
+        .fiche h2 {
+            font-size: 18px; color: var(--cyan);
+            margin-bottom: 16px; text-transform: uppercase; letter-spacing: .08em;
+        }
+
+        .fiche ul { list-style: none; }
+
+        .fiche li {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-top: 1px solid rgba(255,255,255,.12);
+            font-size: 15px; gap: 12px;
+        }
+
+        .fiche li:first-child { border-top: none; }
+        .fiche li span { color: rgba(255,255,255,.7); }
+        .fiche li strong { color: white; text-align: right; }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 75px 20px; }
+        .container { max-width: 1200px; margin: auto; }
+
+        .section-title { text-align: center; margin-bottom: 45px; }
+        .section-title h2 { font-size: 36px; color: var(--blue-dark); margin-bottom: 10px; }
+        .section-title p { color: #60778a; font-size: 18px; max-width: 750px; margin: auto; }
+
+        /* ===== INTRO ===== */
+        .intro-grid {
+            display: grid; grid-template-columns: 1.2fr .8fr;
+            gap: 45px; align-items: center;
+        }
+
+        .intro-text p { font-size: 17px; margin-bottom: 18px; color: #3f5568; }
+        .intro-text strong { color: var(--blue-dark); }
+
+        .intro-image {
+            min-height: 340px; border-radius: var(--radius);
+            background-color: var(--accent);
+            background-image: url("images/Hydraulique.png");
+            background-size: cover; background-position: center;
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== PROGRAMME ===== */
+        #programme { background: #f7fbfd; }
+
+        .modules { display: grid; gap: 18px; }
+
+        .module {
+            background: white; border-radius: 16px; padding: 26px 30px;
+            box-shadow: 0 4px 16px rgba(0,45,80,.07);
+            display: grid; grid-template-columns: 56px 1fr;
+            gap: 22px; align-items: flex-start;
+            transition: box-shadow .3s, transform .3s;
+        }
+
+        .module:hover {
+            box-shadow: 0 10px 30px rgba(0,45,80,.13);
+            transform: translateY(-2px);
+        }
+
+        .module-number {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--accent); color: white;
+            font-weight: 900; font-size: 22px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .module h3 { font-size: 21px; color: var(--blue-dark); margin-bottom: 8px; }
+
+        .module-hours {
+            display: inline-block; font-size: 13px; font-weight: 900;
+            color: var(--accent); background: var(--accent-light);
+            padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
+        }
+
+        .module p { font-size: 15px; color: #4a6172; }
+        .module ul { margin-top: 12px; padding-left: 18px; font-size: 15px; color: #4a6172; }
+        .module ul li { margin-bottom: 5px; }
+
+        /* ===== CTA ===== */
+        .cta-section { text-align: center; padding: 65px 20px; }
+        .cta-section h2 { font-size: 32px; color: var(--blue-dark); margin-bottom: 12px; }
+        .cta-section p { font-size: 18px; color: #60778a; margin-bottom: 28px; }
+
+        .btn-cta {
+            display: inline-block; padding: 16px 34px;
+            border-radius: 50px; background: var(--accent); color: white;
+            font-weight: 900; font-size: 17px; transition: .3s;
+        }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,60,110,.3); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #021e38; color: #a9c4d8;
+            text-align: center; padding: 25px; font-size: 14px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width: 900px) {
+            .hero-body { grid-template-columns: 1fr; }
+            .intro-grid { grid-template-columns: 1fr; }
+            .intro-image { min-height: 220px; order: -1; }
+        }
+
+        @media(max-width: 600px) {
+            .page-hero { padding: 20px 15px 60px; }
+            .page-hero .logo { font-size: 28px; }
+            .page-hero .logo-icon { width: 36px; height: 36px; }
+            .page-hero nav { margin-bottom: 35px; }
+            section { padding: 55px 15px; }
+            .section-title h2 { font-size: 28px; }
+            .module { grid-template-columns: 1fr; gap: 14px; padding: 22px 20px; }
+            .module-number { width: 44px; height: 44px; font-size: 18px; }
+            .module h3 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="page-hero">
+    <div class="container">
+
+        <nav>
+            <a href="index.html" class="logo" aria-label="Retour à l'accueil INGÉEAU">
+                <div class="logo-icon">
+                    <img src="images/ingeeau-logo.png" alt="Logo INGÉEAU">
+                </div>
+                <div>
+                    <span class="inge">INGÉ</span><span class="eau">EAU</span>
+                </div>
+            </a>
+
+            <a href="index.html#parcours" class="back-link">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 12H5"/>
+                    <path d="M10.5 6.5L4 12l6.5 5.5"/>
+                </svg>
+                Tous les parcours
+            </a>
+        </nav>
+
+        <div class="hero-body">
+
+            <div class="hero-text">
+                <span class="tag">Parcours</span>
+                <h1>Hydraulique urbaine</h1>
+                <p class="subtitle">
+                    Concevoir et modéliser des réseaux d'eau durables et performants
+                </p>
+                <div class="hero-buttons">
+                    <a href="#programme" class="btn-primary">Voir le programme</a>
+                    <a href="index.html#contact" class="btn-outline">Nous contacter</a>
+                </div>
+            </div>
+
+            <aside class="fiche" aria-label="Fiche parcours">
+                <h2>Fiche parcours</h2>
+                <ul>
+                    <li><span>Durée</span><strong>72 heures</strong></li>
+                    <li><span>Modules</span><strong>6</strong></li>
+                    <li><span>Format</span><strong>Théorie + pratique</strong></li>
+                    <li><span>Public</span><strong>Élèves ingénieurs</strong></li>
+                    <li><span>1<sup>re</sup> séance</span><strong>Gratuite</strong></li>
+                </ul>
+            </aside>
+
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- ===== INTRO ===== -->
+<section>
+    <div class="container">
+        <div class="intro-grid">
+
+            <div class="intro-text">
+                <p>
+                    Le parcours <strong>Hydraulique urbaine</strong> d'INGÉEAU prépare les
+                    élèves ingénieurs à la conception et au dimensionnement des réseaux
+                    d'eau potable et d'assainissement, en combinant les fondamentaux de
+                    l'hydraulique et la maîtrise des logiciels de modélisation utilisés
+                    en bureau d'études.
+                </p>
+                <p>
+                    Vous apprendrez à <strong>concevoir un réseau d'eau potable</strong>,
+                    à <strong>dimensionner un réseau d'assainissement</strong> (eaux usées
+                    et eaux pluviales), puis à <strong>vérifier et optimiser vos
+                    conceptions sous EPANET, QGISRED et SWMM</strong> — les standards
+                    du secteur.
+                </p>
+                <p>
+                    L'objectif est de vous rendre opérationnels sur des projets réels de
+                    réseaux urbains, du diagnostic à la production de livrables.
+                </p>
+            </div>
+
+            <div class="intro-image" role="img" aria-label="Illustration du parcours Hydraulique urbaine"></div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROGRAMME ===== -->
+<section id="programme">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Programme détaillé</h2>
+            <p>6 modules progressifs, de la théorie hydraulique à la modélisation avancée.</p>
+        </div>
+
+        <div class="modules">
+
+            <div class="module">
+                <div class="module-number">1</div>
+                <div>
+                    <h3>Hydraulique générale</h3>
+                    <span class="module-hours">12 heures</span>
+                    <p>
+                        Rappels des principes fondamentaux de la mécanique des fluides
+                        appliqués aux réseaux sous pression.
+                    </p>
+                    <ul>
+                        <li>Hydrostatique et hydrodynamique</li>
+                        <li>Équation de Bernoulli et pertes de charge</li>
+                        <li>Régimes d'écoulement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">2</div>
+                <div>
+                    <h3>Hydraulique à surface libre</h3>
+                    <span class="module-hours">12 heures</span>
+                    <p>
+                        Étude des écoulements à surface libre, socle du dimensionnement
+                        des réseaux d'assainissement.
+                    </p>
+                    <ul>
+                        <li>Écoulements uniformes et non uniformes</li>
+                        <li>Formule de Manning-Strickler</li>
+                        <li>Canaux et collecteurs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">3</div>
+                <div>
+                    <h3>Alimentation en eau potable</h3>
+                    <span class="module-hours">14 heures</span>
+                    <p>
+                        Conception et dimensionnement complet d'un réseau de distribution
+                        d'eau potable.
+                    </p>
+                    <ul>
+                        <li>Évaluation des besoins et débits de pointe</li>
+                        <li>Dimensionnement des conduites et réservoirs</li>
+                        <li>Bouclage, maillage et pertes de charge</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">4</div>
+                <div>
+                    <h3>Assainissement EU / EP</h3>
+                    <span class="module-hours">14 heures</span>
+                    <p>
+                        Conception et dimensionnement des réseaux d'eaux usées et
+                        d'eaux pluviales.
+                    </p>
+                    <ul>
+                        <li>Réseaux séparatifs et unitaires</li>
+                        <li>Méthodes rationnelle et superficielle</li>
+                        <li>Dimensionnement des collecteurs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">5</div>
+                <div>
+                    <h3>Modélisation AEP — EPANET &amp; QGISRED</h3>
+                    <span class="module-hours">10 heures</span>
+                    <p>
+                        Mise en œuvre d'un modèle de réseau d'eau potable sur un cas
+                        réel, du fichier SIG à la simulation.
+                    </p>
+                    <ul>
+                        <li>Préparation et import des données</li>
+                        <li>Simulation hydraulique sous EPANET</li>
+                        <li>Analyse et optimisation sous QGISRED</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">6</div>
+                <div>
+                    <h3>Modélisation assainissement — SWMM</h3>
+                    <span class="module-hours">10 heures</span>
+                    <p>
+                        Simulation d'un réseau d'assainissement et de ses rejets sous
+                        SWMM, du modèle hydrologique au modèle hydraulique.
+                    </p>
+                    <ul>
+                        <li>Construction du modèle</li>
+                        <li>Scénarios de pluie et propagation</li>
+                        <li>Interprétation des résultats</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Prêt à maîtriser la conception des réseaux urbains ?</h2>
+        <p>La première séance est gratuite, sans engagement.</p>
+        <a href="index.html#contact" class="btn-cta">Nous contacter</a>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <p>© <span id="year"></span> INGÉEAU — Formation &amp; ingénierie de l'eau</p>
+    <p style="margin-top:5px;">« De la théorie à la pratique »</p>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
