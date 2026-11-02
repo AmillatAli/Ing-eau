@@ -5,35 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#032f56">
 
-    <title>Parcours Hydrologie — INGÉEAU</title>
+    <title>Parcours Hydroinformatique — INGÉEAU</title>
 
     <meta name="description"
-          content="Parcours Hydrologie INGÉEAU : comprendre, modéliser et anticiper les ressources en eau. 60 heures de formation pour élèves ingénieurs.">
+          content="Parcours Hydroinformatique INGÉEAU : des outils numériques pour une gestion intelligente de l'eau. 72 heures de formation.">
 
     <link rel="icon" type="image/png" href="images/ingeeau-logoo.png">
 
     <style>
 
-        /* =====================================================
-           VARIABLES (identiques à l'accueil)
-        ===================================================== */
         :root {
             --blue-dark: #032f56;
             --blue: #087fc1;
             --cyan: #16c9ed;
             --cyan-light: #e8f9ff;
             --green: #07934b;
-            --green-light: #ecfaf2;
             --purple: #6224b5;
-            --purple-light: #f5efff;
             --white: #ffffff;
             --text-dark: #172f45;
             --shadow: 0 10px 30px rgba(0, 45, 80, 0.12);
             --radius: 22px;
+
+            /* Accent de la page */
+            --accent: #6224b5;
+            --accent-dark: #4a1a8a;
+            --accent-light: #f5efff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { scroll-behavior: smooth; }
 
         @media (prefers-reduced-motion: reduce) {
@@ -50,111 +49,181 @@
 
         img { max-width: 100%; display: block; }
         a { text-decoration: none; }
-
-        a:focus-visible,
-        button:focus-visible {
-            outline: 3px solid var(--cyan);
-            outline-offset: 3px;
-        }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
 
         .icon {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 1.7;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            width: 24px; height: 24px;
+            fill: none; stroke: currentColor; stroke-width: 1.7;
+            stroke-linecap: round; stroke-linejoin: round;
             flex-shrink: 0;
         }
 
-        /* =====================================================
-           HEADER INTERNE
-        ===================================================== */
-        .page-header {
-            background: linear-gradient(120deg, var(--blue-dark), #024a78);
+        .page-hero {
+            position: relative;
             color: white;
-            padding: 25px 20px 30px;
+            padding: 25px 20px 80px;
+            background:
+                linear-gradient(120deg, rgba(1,43,79,.95) 0%, rgba(2,73,117,.85) 55%, rgba(98,36,181,.55) 100%),
+                url("images/Hydroinformatique.png");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
         }
 
-        .page-header .container {
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; bottom: -1px;
+            height: 60px;
+            background: #ffffff;
+            clip-path: ellipse(75% 100% at 50% 100%);
+            z-index: 1;
+        }
+
+        .page-hero .container {
             max-width: 1200px;
             margin: auto;
+            position: relative;
+            z-index: 2;
         }
 
-        .page-header nav {
+        .page-hero nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 55px;
             flex-wrap: wrap;
             gap: 15px;
         }
 
-        .page-header .logo {
+        .page-hero .logo {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 34px;
+            font-size: 36px;
             font-weight: 900;
             letter-spacing: -1.5px;
         }
 
-        .page-header .logo-icon {
-            width: 40px;
-            height: 40px;
-        }
-
-        .page-header .logo .inge { color: white; }
-        .page-header .logo .eau { color: var(--cyan); }
+        .page-hero .logo-icon { width: 42px; height: 42px; }
+        .page-hero .logo .inge { color: white; }
+        .page-hero .logo .eau { color: var(--cyan); }
 
         .back-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: rgba(255,255,255,.8);
+            color: rgba(255,255,255,.85);
             font-weight: bold;
             font-size: 15px;
             transition: color .3s;
         }
 
         .back-link:hover { color: var(--cyan); }
-
         .back-link .icon { width: 18px; height: 18px; }
 
-        .page-header h1 {
-            font-size: clamp(32px, 5vw, 48px);
-            line-height: 1.1;
-            margin-bottom: 10px;
+        .hero-body {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 45px;
+            align-items: center;
         }
 
-        .page-header .subtitle {
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 30px;
+            background: var(--accent);
+            color: white;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.05;
+            margin-bottom: 14px;
+        }
+
+        .hero-text .subtitle {
             font-size: 20px;
             font-style: italic;
             color: rgba(255,255,255,.85);
-            max-width: 700px;
+            margin-bottom: 28px;
+            max-width: 560px;
         }
 
-        .page-header .hours-badge {
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-outline {
             display: inline-block;
-            margin-top: 15px;
-            padding: 8px 18px;
-            border-radius: 30px;
-            background: var(--cyan);
-            color: var(--blue-dark);
+            padding: 14px 26px;
+            border-radius: 50px;
             font-weight: 900;
             font-size: 15px;
+            transition: .3s;
         }
 
-        /* =====================================================
-           SECTIONS COMMUNES
-        ===================================================== */
-        section { padding: 70px 20px; }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--blue-dark);
         }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(22,201,237,.4);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover { background: white; color: var(--blue-dark); }
+
+        .fiche {
+            background: rgba(2,47,82,.85);
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 24px;
+            padding: 28px 26px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+        }
+
+        .fiche h2 {
+            font-size: 18px;
+            color: var(--cyan);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .fiche ul { list-style: none; }
+
+        .fiche li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255,255,255,.12);
+            font-size: 15px;
+            gap: 12px;
+        }
+
+        .fiche li:first-child { border-top: none; }
+        .fiche li span { color: rgba(255,255,255,.7); }
+        .fiche li strong { color: white; text-align: right; }
+
+        section { padding: 75px 20px; }
+        .container { max-width: 1200px; margin: auto; }
 
         .section-title {
             text-align: center;
@@ -174,13 +243,10 @@
             margin: auto;
         }
 
-        /* =====================================================
-           INTRO / DESCRIPTION
-        ===================================================== */
         .intro-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            gap: 45px;
             align-items: center;
         }
 
@@ -193,18 +259,15 @@
         .intro-text strong { color: var(--blue-dark); }
 
         .intro-image {
-            min-height: 320px;
+            min-height: 340px;
             border-radius: var(--radius);
-            background-color: var(--blue);
-            background-image: url("images/hydrologie.jpg");
+            background-color: var(--accent);
+            background-image: url("images/Hydroinformatique.png");
             background-size: cover;
             background-position: center;
             box-shadow: var(--shadow);
         }
 
-        /* =====================================================
-           OBJECTIFS
-        ===================================================== */
         .objectives {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -216,15 +279,14 @@
             border-radius: 18px;
             padding: 28px 24px;
             box-shadow: var(--shadow);
-            border-top: 4px solid var(--blue);
+            border-top: 4px solid var(--accent);
         }
 
         .objective-card .icon-wrap {
-            width: 52px;
-            height: 52px;
+            width: 52px; height: 52px;
             border-radius: 14px;
-            background: var(--cyan-light);
-            color: var(--blue);
+            background: var(--accent-light);
+            color: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -244,60 +306,55 @@
             color: #547083;
         }
 
-        /* =====================================================
-           PROGRAMME (MODULES)
-        ===================================================== */
         #programme { background: #f7fbfd; }
 
-        .modules {
-            display: grid;
-            gap: 18px;
-        }
+        .modules { display: grid; gap: 18px; }
 
         .module {
             background: white;
             border-radius: 16px;
-            padding: 24px 28px;
+            padding: 26px 30px;
             box-shadow: 0 4px 16px rgba(0,45,80,.07);
             display: grid;
-            grid-template-columns: 50px 1fr;
-            gap: 20px;
+            grid-template-columns: 56px 1fr;
+            gap: 22px;
             align-items: flex-start;
-            transition: box-shadow .3s;
+            transition: box-shadow .3s, transform .3s;
         }
 
         .module:hover {
-            box-shadow: 0 8px 26px rgba(0,45,80,.12);
+            box-shadow: 0 10px 30px rgba(0,45,80,.13);
+            transform: translateY(-2px);
         }
 
         .module-number {
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: var(--blue);
+            background: var(--accent);
             color: white;
             font-weight: 900;
-            font-size: 20px;
+            font-size: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .module h3 {
-            font-size: 20px;
+            font-size: 21px;
             color: var(--blue-dark);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
-        .module .module-hours {
+        .module-hours {
             display: inline-block;
             font-size: 13px;
-            font-weight: bold;
-            color: var(--blue);
-            background: var(--cyan-light);
-            padding: 3px 12px;
+            font-weight: 900;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 4px 14px;
             border-radius: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .module p {
@@ -306,27 +363,24 @@
         }
 
         .module ul {
-            margin-top: 10px;
+            margin-top: 12px;
             padding-left: 18px;
             font-size: 15px;
             color: #4a6172;
         }
 
-        .module ul li { margin-bottom: 4px; }
+        .module ul li { margin-bottom: 5px; }
 
-        /* =====================================================
-           POUR QUI / PRÉREQUIS
-        ===================================================== */
         .audience-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
         .audience-box {
             background: white;
             border-radius: 18px;
-            padding: 28px;
+            padding: 30px;
             box-shadow: var(--shadow);
         }
 
@@ -336,15 +390,12 @@
             gap: 10px;
             color: var(--blue-dark);
             font-size: 19px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
-        .audience-box h3 .icon { color: var(--blue); width: 22px; height: 22px; }
+        .audience-box h3 .icon { color: var(--accent); width: 22px; height: 22px; }
 
-        .audience-box ul {
-            list-style: none;
-            padding: 0;
-        }
+        .audience-box ul { list-style: none; }
 
         .audience-box li {
             display: flex;
@@ -357,20 +408,15 @@
 
         .audience-box li::before {
             content: "•";
-            color: var(--blue);
+            color: var(--accent);
             font-weight: 900;
             font-size: 20px;
             line-height: 1.3;
         }
 
-        /* =====================================================
-           MÉTHODE / RESSOURCES
-        ===================================================== */
         #methode { background: var(--blue-dark); color: white; }
-
         #methode .section-title h2 { color: white; }
-
-        #methode .section-title p { color: rgba(255,255,255,.7); }
+        #methode .section-title p { color: rgba(255,255,255,.72); }
 
         .method-grid {
             display: grid;
@@ -379,10 +425,10 @@
         }
 
         .method-item {
-            background: rgba(255,255,255,.08);
+            background: rgba(255,255,255,.07);
             border: 1px solid rgba(255,255,255,.15);
             border-radius: 18px;
-            padding: 26px 22px;
+            padding: 28px 22px;
             text-align: center;
         }
 
@@ -398,22 +444,12 @@
             margin: 0 auto 15px;
         }
 
-        .method-item h3 {
-            font-size: 17px;
-            margin-bottom: 8px;
-        }
+        .method-item h3 { font-size: 17px; margin-bottom: 8px; }
+        .method-item p { font-size: 14px; color: rgba(255,255,255,.72); }
 
-        .method-item p {
-            font-size: 14px;
-            color: rgba(255,255,255,.72);
-        }
-
-        /* =====================================================
-           CTA FINAL
-        ===================================================== */
         .cta-section {
             text-align: center;
-            padding: 60px 20px;
+            padding: 65px 20px;
         }
 
         .cta-section h2 {
@@ -432,8 +468,8 @@
             display: inline-block;
             padding: 16px 34px;
             border-radius: 50px;
-            background: var(--cyan);
-            color: var(--blue-dark);
+            background: var(--accent);
+            color: white;
             font-weight: 900;
             font-size: 17px;
             transition: .3s;
@@ -441,12 +477,9 @@
 
         .btn-cta:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,200,240,.35);
+            box-shadow: 0 12px 28px rgba(0,60,110,.3);
         }
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
         footer {
             background: #021e38;
             color: #a9c4d8;
@@ -455,20 +488,22 @@
             font-size: 14px;
         }
 
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
         @media(max-width: 900px) {
+            .hero-body { grid-template-columns: 1fr; }
             .intro-grid { grid-template-columns: 1fr; }
             .intro-image { min-height: 220px; order: -1; }
         }
 
         @media(max-width: 600px) {
-            .page-header .logo { font-size: 28px; }
-            section { padding: 50px 15px; }
+            .page-hero { padding: 20px 15px 60px; }
+            .page-hero .logo { font-size: 28px; }
+            .page-hero .logo-icon { width: 36px; height: 36px; }
+            .page-hero nav { margin-bottom: 35px; }
+            section { padding: 55px 15px; }
             .section-title h2 { font-size: 28px; }
-            .module { grid-template-columns: 1fr; gap: 12px; }
-            .module-number { width: 42px; height: 42px; font-size: 17px; }
+            .module { grid-template-columns: 1fr; gap: 14px; padding: 22px 20px; }
+            .module-number { width: 44px; height: 44px; font-size: 18px; }
+            .module h3 { font-size: 18px; }
         }
 
     </style>
@@ -476,10 +511,7 @@
 
 <body>
 
-<!-- =========================================================
-     HEADER INTERNE
-========================================================= -->
-<header class="page-header">
+<header class="page-hero">
     <div class="container">
 
         <nav>
@@ -501,13 +533,32 @@
             </a>
         </nav>
 
-        <h1>Parcours Hydrologie</h1>
+        <div class="hero-body">
 
-        <p class="subtitle">
-            Comprendre, modéliser et anticiper les ressources en eau
-        </p>
+            <div class="hero-text">
+                <span class="tag">Parcours</span>
+                <h1>Hydroinformatique</h1>
+                <p class="subtitle">
+                    Des outils numériques pour une gestion intelligente de l'eau
+                </p>
+                <div class="hero-buttons">
+                    <a href="#programme" class="btn-primary">Voir le programme</a>
+                    <a href="index.html#contact" class="btn-outline">Nous contacter</a>
+                </div>
+            </div>
 
-        <span class="hours-badge">60 heures de formation</span>
+            <aside class="fiche" aria-label="Fiche parcours">
+                <h2>Fiche parcours</h2>
+                <ul>
+                    <li><span>Durée</span><strong>72 heures</strong></li>
+                    <li><span>Modules</span><strong>4</strong></li>
+                    <li><span>Format</span><strong>Théorie + pratique</strong></li>
+                    <li><span>Public</span><strong>Élèves ingénieurs</strong></li>
+                    <li><span>1<sup>re</sup> séance</span><strong>Gratuite</strong></li>
+                </ul>
+            </aside>
+
+        </div>
 
     </div>
 </header>
@@ -515,51 +566,43 @@
 
 <main>
 
-<!-- =========================================================
-     INTRO
-========================================================= -->
 <section>
     <div class="container">
         <div class="intro-grid">
 
             <div class="intro-text">
                 <p>
-                    Le parcours <strong>Hydrologie</strong> d'INGÉEAU forme les élèves
-                    ingénieurs à l'analyse du cycle de l'eau à l'échelle des bassins
-                    versants. Il combine les fondements physiques de l'hydrologie,
-                    les méthodes de l'ingénieur et la maîtrise des outils de
-                    modélisation les plus utilisés en bureau d'études.
+                    Le parcours <strong>Hydroinformatique</strong> d'INGÉEAU initie les
+                    élèves ingénieurs aux outils numériques et à la programmation
+                    appliqués à l'eau. Il couvre progressivement l'algorithmique,
+                    Python, la science de la donnée et l'intelligence artificielle,
+                    jusqu'aux applications avancées à l'hydraulique et à l'hydrologie.
                 </p>
                 <p>
-                    L'objectif est de vous rendre capable de <strong>caractériser une
-                    ressource en eau</strong>, d'<strong>évaluer les débits de crue et
-                    d'étiage</strong>, et de <strong>simuler le comportement
-                    hydrologique et hydrodynamique</strong> d'un bassin ou d'un cours
-                    d'eau, avec une approche concrète orientée terrain.
+                    Vous apprendrez à <strong>automatiser le traitement de données
+                    environnementales</strong>, à <strong>développer vos propres
+                    modèles</strong> et à <strong>exploiter le machine learning</strong>
+                    pour analyser, prévoir et optimiser la gestion des ressources en eau.
                 </p>
                 <p>
-                    Cette formation s'adresse aux étudiants qui souhaitent renforcer
-                    leur profil avant un stage, un PFE ou une entrée dans la vie
-                    professionnelle dans les métiers de l'eau.
+                    C'est le parcours idéal si vous visez les métiers émergents de
+                    l'eau numérique, de la smart city ou de la recherche appliquée.
                 </p>
             </div>
 
-            <div class="intro-image" role="img" aria-label="Illustration du parcours Hydrologie"></div>
+            <div class="intro-image" role="img" aria-label="Illustration du parcours Hydroinformatique"></div>
 
         </div>
     </div>
 </section>
 
 
-<!-- =========================================================
-     OBJECTIFS
-========================================================= -->
 <section>
     <div class="container">
 
         <div class="section-title">
             <h2>Ce que vous saurez faire</h2>
-            <p>Des compétences opérationnelles directement mobilisables en projet.</p>
+            <p>Des compétences numériques directement applicables aux métiers de l'eau.</p>
         </div>
 
         <div class="objectives">
@@ -567,13 +610,13 @@
             <div class="objective-card">
                 <div class="icon-wrap">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="12" r="8.5"/>
-                        <circle cx="12" cy="12" r="4.4"/>
-                        <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>
+                        <path d="M9.6 8.6L7.6 10.4l2 1.8M14.4 8.6l2 1.8-2 1.8"/>
+                        <rect x="2.5" y="4" width="19" height="12.4" rx="2"/>
+                        <path d="M9 20.4h6M12 16.4v4"/>
                     </svg>
                 </div>
-                <h3>Analyser un bassin versant</h3>
-                <p>Caractériser les processus hydrologiques et les données disponibles pour un bassin donné.</p>
+                <h3>Programmer en Python</h3>
+                <p>Écrire des scripts robustes pour traiter et analyser des données hydrologiques.</p>
             </div>
 
             <div class="objective-card">
@@ -583,8 +626,19 @@
                         <path d="M3 21h18"/>
                     </svg>
                 </div>
-                <h3>Prédéterminer les crues</h3>
-                <p>Appliquer les méthodes de l'hydrologie de l'ingénieur pour estimer les débits de projet.</p>
+                <h3>Automatiser les traitements</h3>
+                <p>Automatiser la préparation, le contrôle qualité et la visualisation de données.</p>
+            </div>
+
+            <div class="objective-card">
+                <div class="icon-wrap">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="9.4" r="5.4"/>
+                        <path d="M8.6 14.1L7 21l5-2.6 5 2.6-1.6-6.9"/>
+                    </svg>
+                </div>
+                <h3>Appliquer l'IA</h3>
+                <p>Utiliser le machine learning pour la prévision et la gestion intelligente de l'eau.</p>
             </div>
 
             <div class="objective-card">
@@ -594,18 +648,8 @@
                         <path d="M3 10h18M9 10v10"/>
                     </svg>
                 </div>
-                <h3>Modéliser en hydrologie</h3>
-                <p>Construire et caler un modèle hydrologique pour simuler la réponse d'un bassin.</p>
-            </div>
-
-            <div class="objective-card">
-                <div class="icon-wrap">
-                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 3.2c3.3 3.6 5.6 6.5 5.6 9.3a5.6 5.6 0 0 1-11.2 0c0-2.8 2.3-5.7 5.6-9.3z"/>
-                    </svg>
-                </div>
-                <h3>Simuler l'hydrodynamique</h3>
-                <p>Utiliser un modèle hydrodynamique pour étudier les écoulements en rivière.</p>
+                <h3>Construire un tableau de bord</h3>
+                <p>Développer des interfaces et visualisations pour le suivi de données hydro-environnementales.</p>
             </div>
 
         </div>
@@ -614,87 +658,80 @@
 </section>
 
 
-<!-- =========================================================
-     PROGRAMME
-========================================================= -->
 <section id="programme">
     <div class="container">
 
         <div class="section-title">
             <h2>Programme détaillé</h2>
-            <p>4 modules structurés pour progresser de la théorie à la pratique.</p>
+            <p>4 modules progressifs, du premier script Python à l'hydroinformatique avancée.</p>
         </div>
 
         <div class="modules">
 
-            <!-- Module 1 -->
             <div class="module">
                 <div class="module-number">1</div>
                 <div>
-                    <h3>SIG appliqué à l'eau</h3>
-                    <span class="module-hours">12 h</span>
+                    <h3>Initiation à la programmation</h3>
+                    <span class="module-hours">16 heures</span>
                     <p>
-                        Prise en main des outils SIG pour préparer, analyser et
-                        cartographier les données hydrologiques d'un bassin versant.
+                        Découverte des concepts fondamentaux de la programmation et
+                        de l'algorithmique à travers des exemples appliqués à l'eau.
                     </p>
                     <ul>
-                        <li>Manipulation de couches raster et vecteur</li>
-                        <li>Extraction de bassins versants et de réseaux hydrographiques</li>
-                        <li>Production de cartes thématiques</li>
+                        <li>Variables, conditions et boucles</li>
+                        <li>Fonctions et structures de données</li>
+                        <li>Premiers scripts Python</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Module 2 -->
             <div class="module">
                 <div class="module-number">2</div>
                 <div>
-                    <h3>Hydrologie de l'ingénieur</h3>
-                    <span class="module-hours">18 h</span>
+                    <h3>Programmation avancée avec Python</h3>
+                    <span class="module-hours">20 heures</span>
                     <p>
-                        Acquisition des méthodes opérationnelles pour caractériser
-                        les ressources en eau et prédéterminer les crues.
+                        Maîtrise de Python pour l'ingénierie : bibliothèques
+                        scientifiques, manipulation de fichiers et automatisation.
                     </p>
                     <ul>
-                        <li>Analyse de la relation pluie–débit</li>
-                        <li>Méthodes de prédétermination des crues</li>
-                        <li>Estimation des débits d'étiage</li>
+                        <li>NumPy, Pandas et Matplotlib</li>
+                        <li>Lecture et écriture de fichiers (CSV, Excel, NetCDF)</li>
+                        <li>Scripts d'automatisation et organisation du code</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Module 3 -->
             <div class="module">
                 <div class="module-number">3</div>
                 <div>
-                    <h3>Modélisation hydrologique</h3>
-                    <span class="module-hours">15 h</span>
+                    <h3>IA &amp; science de la donnée</h3>
+                    <span class="module-hours">18 heures</span>
                     <p>
-                        Construction, calage et exploitation d'un modèle
-                        hydrologique pour simuler la réponse d'un bassin versant.
+                        Introduction au machine learning appliqué aux données
+                        hydro-environnementales.
                     </p>
                     <ul>
-                        <li>Choix et mise en œuvre d'un modèle pluie–débit</li>
-                        <li>Calage et validation sur des cas réels</li>
-                        <li>Interprétation des résultats</li>
+                        <li>Prétraitement et exploration des données</li>
+                        <li>Régression, classification et séries temporelles</li>
+                        <li>Évaluation et interprétation des modèles</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Module 4 -->
             <div class="module">
                 <div class="module-number">4</div>
                 <div>
-                    <h3>Modélisation hydrodynamique</h3>
-                    <span class="module-hours">15 h</span>
+                    <h3>Hydroinformatique avancée</h3>
+                    <span class="module-hours">18 heures</span>
                     <p>
-                        Simulation des écoulements à surface libre pour l'étude
-                        des crues et la gestion des cours d'eau.
+                        Applications concrètes : couplage de modèles, prévision de
+                        débits et tableaux de bord de suivi.
                     </p>
                     <ul>
-                        <li>Principes de l'hydrodynamique 1D/2D</li>
-                        <li>Mise en œuvre d'un modèle de propagation de crue</li>
-                        <li>Analyse de scénarios et de risques</li>
+                        <li>Couplage données / modèles hydrologiques</li>
+                        <li>Prévision et aide à la décision</li>
+                        <li>Construction d'une application de suivi</li>
                     </ul>
                 </div>
             </div>
@@ -705,9 +742,6 @@
 </section>
 
 
-<!-- =========================================================
-     POUR QUI / PRÉREQUIS
-========================================================= -->
 <section>
     <div class="container">
 
@@ -726,9 +760,9 @@
                     Public visé
                 </h3>
                 <ul>
-                    <li>Élèves ingénieurs en génie civil, hydraulique ou environnement</li>
-                    <li>Étudiants en master spécialisé dans les métiers de l'eau</li>
-                    <li>Jeunes diplômés souhaitant renforcer leur profil technique</li>
+                    <li>Élèves ingénieurs en hydraulique, génie civil ou environnement</li>
+                    <li>Étudiants en master visant les métiers du numérique appliqué à l'eau</li>
+                    <li>Jeunes diplômés souhaitant ajouter une compétence numérique forte à leur profil</li>
                 </ul>
             </div>
 
@@ -741,9 +775,9 @@
                     Prérequis
                 </h3>
                 <ul>
-                    <li>Notions de base en mathématiques et physique</li>
-                    <li>Une première approche de l'hydraulique ou de l'hydrologie est un plus</li>
-                    <li>Aucun niveau avancé en programmation n'est exigé</li>
+                    <li>Notions de base en mathématiques et statistiques</li>
+                    <li>Aucune expérience préalable en programmation n'est exigée</li>
+                    <li>Un intérêt marqué pour le numérique et la donnée</li>
                 </ul>
             </div>
 
@@ -753,9 +787,6 @@
 </section>
 
 
-<!-- =========================================================
-     MÉTHODE PÉDAGOGIQUE
-========================================================= -->
 <section id="methode">
     <div class="container">
 
@@ -796,7 +827,7 @@
                     </svg>
                 </div>
                 <h3>Outils professionnels</h3>
-                <p>SIG, modèles hydrologiques et hydrodynamiques utilisés en bureau d'études.</p>
+                <p>Python, Jupyter, bibliothèques scientifiques et scikit-learn.</p>
             </div>
 
             <div class="method-item">
@@ -816,12 +847,9 @@
 </section>
 
 
-<!-- =========================================================
-     CTA FINAL
-========================================================= -->
 <section class="cta-section">
     <div class="container">
-        <h2>Prêt à renforcer votre profil en hydrologie ?</h2>
+        <h2>Prêt à faire entrer l'eau dans l'ère numérique ?</h2>
         <p>La première séance est gratuite, sans engagement.</p>
         <a href="index.html#contact" class="btn-cta">Nous contacter</a>
     </div>
