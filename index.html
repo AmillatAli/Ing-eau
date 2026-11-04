@@ -1058,11 +1058,130 @@
             }
         }
 
+
+        /* =====================================================
+           HYDRAULIC FORMULAS + SCROLL EFFECTS
+        ===================================================== */
+
+        .header-container { padding-bottom: 125px; }
+
+        .formulas {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .formula {
+            position: absolute;
+            color: rgba(200, 240, 252, 0.6);
+            font-size: 19px;
+            white-space: nowrap;
+            text-shadow: 0 0 18px rgba(22, 201, 237, 0.4);
+            animation: formulaFloat var(--d, 18s) ease-in-out infinite alternate;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .formula small {
+            display: block;
+            margin-bottom: 4px;
+            font: bold 10px Arial, Helvetica, sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(22, 201, 237, 0.75);
+        }
+
+        .formula .katex, .eq .katex { font-size: 1em; }
+
+        @keyframes formulaFloat {
+            0%   { transform: translate(0, 0);       opacity: .35; }
+            50%  { opacity: .85; }
+            100% { transform: translate(24px, -14px); opacity: .45; }
+        }
+
+        .eq-band {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 70px;
+            z-index: 2;
+            overflow: hidden;
+            padding: 10px 0;
+            background: rgba(2, 47, 82, 0.55);
+            border-top: 1px solid rgba(22, 201, 237, 0.25);
+            border-bottom: 1px solid rgba(22, 201, 237, 0.25);
+            backdrop-filter: blur(6px);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+
+        .eq-track {
+            display: flex;
+            width: max-content;
+            animation: eqScroll 70s linear infinite;
+        }
+
+        .eq-band:hover .eq-track { animation-play-state: paused; }
+
+        .eq {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            margin-right: 64px;
+            color: #e6f8ff;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        .eq b {
+            font: bold 11px Arial, Helvetica, sans-serif;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--cyan);
+        }
+
+        .eq i { font-style: normal; }
+
+        @keyframes eqScroll {
+            to { transform: translateX(-50%); }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            z-index: 1000;
+            background: linear-gradient(90deg, var(--cyan), var(--blue));
+        }
+
+        .js .reveal:not(.in) { opacity: 0; }
+        .reveal.in { animation: revealUp .7s ease backwards; }
+
+        @keyframes revealUp {
+            from { opacity: 0; transform: translateY(26px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        @media (max-width: 900px) {
+            .formulas { display: none; }
+            .eq { font-size: 16px; margin-right: 44px; }
+        }
+
+        @media (max-width: 600px) {
+            .header-container { padding-bottom: 115px; }
+        }
+
     </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 
 
 <body>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <a class="skip-link" href="#main">Aller au contenu</a>
 
@@ -1080,6 +1199,9 @@
         <path class="flow-line" d="M-50,510 C300,470 600,550 1250,500" />
         <path class="flow-line" d="M-50,610 C300,580 600,640 1250,600" />
     </svg>
+
+    <!-- Floating hydraulic formulas -->
+    <div class="formulas" aria-hidden="true"><div class="formula" style="left:5%;top:13.5%;--delay:0s;--d:17s"><small>Manning-Strickler</small><span data-tex="Q = K_s\,S\,R_h^{2/3}\sqrt{I}">Q = Ks·S·Rh^(2/3)·√I</span></div><div class="formula" style="left:35%;top:12.5%;--delay:3s;--d:21s"><small>Navier-Stokes</small><span data-tex="\rho\left(\dfrac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \rho\mathbf{g}">ρ(∂u/∂t + u·∇u) = −∇p + μ∇²u + ρg</span></div><div class="formula" style="left:76%;top:13.5%;--delay:6s;--d:19s"><small>Saint-Venant</small><span data-tex="\dfrac{\partial A}{\partial t} + \dfrac{\partial Q}{\partial x} = 0">∂A/∂t + ∂Q/∂x = 0</span></div></div>
 
     <!-- Rising bubbles -->
     <div class="bubbles" aria-hidden="true">
@@ -1216,6 +1338,9 @@
     </div>
 
     <!-- Wave transition into the next section -->
+    <!-- Flowing band of hydraulic equations -->
+    <div class="eq-band" aria-hidden="true"><div class="eq-track"><span class="eq"><b>Manning-Strickler</b><i data-tex="Q = K_s\,S\,R_h^{2/3}\sqrt{I}">Q = Ks·S·Rh^(2/3)·√I</i></span><span class="eq"><b>Bernoulli</b><i data-tex="z + \dfrac{p}{\rho g} + \dfrac{V^2}{2g} = H">z + p/ρg + V²/2g = H</i></span><span class="eq"><b>Navier-Stokes</b><i data-tex="\rho\left(\dfrac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \rho\mathbf{g}">ρ(∂u/∂t + u·∇u) = −∇p + μ∇²u + ρg</i></span><span class="eq"><b>Caquot</b><i data-tex="Q = k^{1/u}\,I^{v/u}\,C^{1/u}\,A^{w/u}">Q = k^(1/u)·I^(v/u)·C^(1/u)·A^(w/u)</i></span><span class="eq"><b>Saint-Venant</b><i data-tex="\dfrac{\partial A}{\partial t} + \dfrac{\partial Q}{\partial x} = 0">∂A/∂t + ∂Q/∂x = 0</i></span><span class="eq"><b>Darcy-Weisbach</b><i data-tex="\Delta H = \lambda\,\dfrac{L}{D}\,\dfrac{V^2}{2g}">ΔH = λ·(L/D)·V²/2g</i></span><span class="eq"><b>Froude</b><i data-tex="Fr = \dfrac{V}{\sqrt{g\,h}}">Fr = V/√(g·h)</i></span><span class="eq"><b>Joukowsky · coup de bélier</b><i data-tex="\Delta H = \dfrac{a\,\Delta V}{g}">ΔH = a·ΔV/g</i></span><span class="eq"><b>Reynolds</b><i data-tex="Re = \dfrac{V D}{\nu}">Re = V·D/ν</i></span><span class="eq"><b>Continuité</b><i data-tex="Q = V\,S">Q = V·S</i></span><span class="eq"><b>Manning-Strickler</b><i data-tex="Q = K_s\,S\,R_h^{2/3}\sqrt{I}">Q = Ks·S·Rh^(2/3)·√I</i></span><span class="eq"><b>Bernoulli</b><i data-tex="z + \dfrac{p}{\rho g} + \dfrac{V^2}{2g} = H">z + p/ρg + V²/2g = H</i></span><span class="eq"><b>Navier-Stokes</b><i data-tex="\rho\left(\dfrac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \rho\mathbf{g}">ρ(∂u/∂t + u·∇u) = −∇p + μ∇²u + ρg</i></span><span class="eq"><b>Caquot</b><i data-tex="Q = k^{1/u}\,I^{v/u}\,C^{1/u}\,A^{w/u}">Q = k^(1/u)·I^(v/u)·C^(1/u)·A^(w/u)</i></span><span class="eq"><b>Saint-Venant</b><i data-tex="\dfrac{\partial A}{\partial t} + \dfrac{\partial Q}{\partial x} = 0">∂A/∂t + ∂Q/∂x = 0</i></span><span class="eq"><b>Darcy-Weisbach</b><i data-tex="\Delta H = \lambda\,\dfrac{L}{D}\,\dfrac{V^2}{2g}">ΔH = λ·(L/D)·V²/2g</i></span><span class="eq"><b>Froude</b><i data-tex="Fr = \dfrac{V}{\sqrt{g\,h}}">Fr = V/√(g·h)</i></span><span class="eq"><b>Joukowsky · coup de bélier</b><i data-tex="\Delta H = \dfrac{a\,\Delta V}{g}">ΔH = a·ΔV/g</i></span><span class="eq"><b>Reynolds</b><i data-tex="Re = \dfrac{V D}{\nu}">Re = V·D/ν</i></span><span class="eq"><b>Continuité</b><i data-tex="Q = V\,S">Q = V·S</i></span></div></div>
+
     <div class="wave-divider" aria-hidden="true">
         <svg class="wave-back" viewBox="0 0 2400 60" preserveAspectRatio="none">
             <path fill="#16c9ed" opacity="0.35"
@@ -1733,6 +1858,7 @@
 </footer>
 
 
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script>
     // Mobile navigation toggle
     (function () {
@@ -1751,6 +1877,38 @@
             });
         });
     })();
+
+    // Render formulas with KaTeX (plain-text fallback stays if the CDN is unreachable)
+    function renderMath() {
+        if (!window.katex) return;
+        document.querySelectorAll('[data-tex]').forEach(function (el) {
+            try { katex.render(el.getAttribute('data-tex'), el, { throwOnError: false }); } catch (e) {}
+        });
+    }
+    if (window.katex) { renderMath(); } else { window.addEventListener('load', renderMath); }
+
+    // Scroll progress bar
+    var bar = document.getElementById('scrollProgress');
+    function onScroll() {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Reveal on scroll
+    var targets = document.querySelectorAll('.section-title, .course, .free-session, .advantage, .contact > div');
+    targets.forEach(function (el, i) { el.classList.add('reveal'); });
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.12 });
+        targets.forEach(function (el) { io.observe(el); });
+    } else {
+        targets.forEach(function (el) { el.classList.add('in'); });
+    }
 
     // Footer year, always current
     document.getElementById('year').textContent = new Date().getFullYear();
