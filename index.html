@@ -1063,8 +1063,6 @@
            HYDRAULIC FORMULAS + SCROLL EFFECTS
         ===================================================== */
 
-        .header-container { padding-bottom: 125px; }
-
         .formulas {
             position: absolute;
             inset: 0;
@@ -1079,7 +1077,7 @@
             font-size: 19px;
             white-space: nowrap;
             text-shadow: 0 0 18px rgba(22, 201, 237, 0.4);
-            animation: formulaFloat var(--d, 18s) ease-in-out infinite alternate;
+            animation: formulaPulse var(--d, 11s) ease-in-out infinite;
             animation-delay: var(--delay, 0s);
         }
 
@@ -1092,59 +1090,13 @@
             color: rgba(22, 201, 237, 0.75);
         }
 
-        .formula .katex, .eq .katex { font-size: 1em; }
+        .formula .katex { font-size: 1em; }
 
-        @keyframes formulaFloat {
-            0%   { transform: translate(0, 0);       opacity: .35; }
-            50%  { opacity: .85; }
-            100% { transform: translate(24px, -14px); opacity: .45; }
-        }
-
-        .eq-band {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 70px;
-            z-index: 2;
-            overflow: hidden;
-            padding: 10px 0;
-            background: rgba(2, 47, 82, 0.55);
-            border-top: 1px solid rgba(22, 201, 237, 0.25);
-            border-bottom: 1px solid rgba(22, 201, 237, 0.25);
-            backdrop-filter: blur(6px);
-            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-        }
-
-        .eq-track {
-            display: flex;
-            width: max-content;
-            animation: eqScroll 70s linear infinite;
-        }
-
-        .eq-band:hover .eq-track { animation-play-state: paused; }
-
-        .eq {
-            display: inline-flex;
-            align-items: center;
-            gap: 14px;
-            margin-right: 64px;
-            color: #e6f8ff;
-            font-size: 18px;
-            white-space: nowrap;
-        }
-
-        .eq b {
-            font: bold 11px Arial, Helvetica, sans-serif;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--cyan);
-        }
-
-        .eq i { font-style: normal; }
-
-        @keyframes eqScroll {
-            to { transform: translateX(-50%); }
+        @keyframes formulaPulse {
+            0%   { opacity: 0;   transform: translateY(10px) scale(.96); }
+            20%  { opacity: .6; }
+            65%  { opacity: .6; }
+            100% { opacity: 0;   transform: translateY(-14px) scale(1.02); }
         }
 
         .scroll-progress {
@@ -1166,12 +1118,8 @@
         }
 
         @media (max-width: 900px) {
-            .formulas { display: none; }
-            .eq { font-size: 16px; margin-right: 44px; }
-        }
-
-        @media (max-width: 600px) {
-            .header-container { padding-bottom: 115px; }
+            .formula { font-size: 15px; }
+            .formula:nth-child(n+7) { display: none; }
         }
 
     </style>
@@ -1201,7 +1149,7 @@
     </svg>
 
     <!-- Floating hydraulic formulas -->
-    <div class="formulas" aria-hidden="true"><div class="formula" style="left:5%;top:13.5%;--delay:0s;--d:17s"><small>Manning-Strickler</small><span data-tex="Q = K_s\,S\,R_h^{2/3}\sqrt{I}">Q = Ks·S·Rh^(2/3)·√I</span></div><div class="formula" style="left:35%;top:12.5%;--delay:3s;--d:21s"><small>Navier-Stokes</small><span data-tex="\rho\left(\dfrac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \rho\mathbf{g}">ρ(∂u/∂t + u·∇u) = −∇p + μ∇²u + ρg</span></div><div class="formula" style="left:76%;top:13.5%;--delay:6s;--d:19s"><small>Saint-Venant</small><span data-tex="\dfrac{\partial A}{\partial t} + \dfrac{\partial Q}{\partial x} = 0">∂A/∂t + ∂Q/∂x = 0</span></div></div>
+    <div class="formulas" aria-hidden="true"><div class="formula" style="left:4%;top:14%;--delay:0s;--d:11s"><small>Manning-Strickler</small><span data-tex="Q = K_s\,S\,R_h^{2/3}\sqrt{I}">Q = Ks·S·Rh^(2/3)·√I</span></div><div class="formula" style="left:34%;top:9%;--delay:3s;--d:13s"><small>Navier-Stokes</small><span data-tex="\rho\left(\dfrac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \rho\mathbf{g}">ρ(∂u/∂t + u·∇u) = −∇p + μ∇²u + ρg</span></div><div class="formula" style="left:76%;top:12%;--delay:6s;--d:10s"><small>Saint-Venant</small><span data-tex="\dfrac{\partial A}{\partial t} + \dfrac{\partial Q}{\partial x} = 0">∂A/∂t + ∂Q/∂x = 0</span></div><div class="formula" style="left:50%;top:31%;--delay:1.5s;--d:12s"><small>Bernoulli</small><span data-tex="z + \dfrac{p}{\rho g} + \dfrac{V^2}{2g} = H">z + p/ρg + V²/2g = H</span></div><div class="formula" style="left:5%;top:80%;--delay:8s;--d:13s"><small>Caquot</small><span data-tex="Q = k^{1/u}\,I^{v/u}\,C^{1/u}\,A^{w/u}">Q = k^(1/u)·I^(v/u)·C^(1/u)·A^(w/u)</span></div><div class="formula" style="left:38%;top:82%;--delay:4.5s;--d:11s"><small>Darcy-Weisbach</small><span data-tex="\Delta H = \lambda\,\dfrac{L}{D}\,\dfrac{V^2}{2g}">ΔH = λ·(L/D)·V²/2g</span></div><div class="formula" style="left:64%;top:86%;--delay:9.5s;--d:10s"><small>Froude</small><span data-tex="Fr = \dfrac{V}{\sqrt{g\,h}}">Fr = V/√(g·h)</span></div><div class="formula" style="left:82%;top:52%;--delay:2.5s;--d:12s"><small>Joukowsky · coup de bélier</small><span data-tex="\Delta H = \dfrac{a\,\Delta V}{g}">ΔH = a·ΔV/g</span></div><div class="formula" style="left:46%;top:58%;--delay:7s;--d:9s"><small>Reynolds</small><span data-tex="Re = \dfrac{V D}{\nu}">Re = V·D/ν</span></div><div class="formula" style="left:88%;top:76%;--delay:5.5s;--d:11s"><small>Continuité</small><span data-tex="Q = V\,S">Q = V·S</span></div></div>
 
     <!-- Rising bubbles -->
     <div class="bubbles" aria-hidden="true">
@@ -1338,9 +1286,6 @@
     </div>
 
     <!-- Wave transition into the next section -->
-    <!-- Flowing band of hydraulic equations -->
-    <div class="eq-band" aria-hidden="true"><div class="eq-track"><span class="eq"><b>Manning-Strickler</b><i data-tex="Q = K_s\,S\,R_h^{2/3}\sqrt{I}">Q = Ks·S·Rh^(2/3)·√I</i></span><span class="eq"><b>Bernoulli</b><i data-tex="z + \dfrac{p}{\rho g} + \dfrac{V^2}{2g} = H">z + p/ρg + V²/2g = H</i></span><span class="eq"><b>Navier-Stokes</b><i data-tex="\rho\left(\dfrac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \rho\mathbf{g}">ρ(∂u/∂t + u·∇u) = −∇p + μ∇²u + ρg</i></span><span class="eq"><b>Caquot</b><i data-tex="Q = k^{1/u}\,I^{v/u}\,C^{1/u}\,A^{w/u}">Q = k^(1/u)·I^(v/u)·C^(1/u)·A^(w/u)</i></span><span class="eq"><b>Saint-Venant</b><i data-tex="\dfrac{\partial A}{\partial t} + \dfrac{\partial Q}{\partial x} = 0">∂A/∂t + ∂Q/∂x = 0</i></span><span class="eq"><b>Darcy-Weisbach</b><i data-tex="\Delta H = \lambda\,\dfrac{L}{D}\,\dfrac{V^2}{2g}">ΔH = λ·(L/D)·V²/2g</i></span><span class="eq"><b>Froude</b><i data-tex="Fr = \dfrac{V}{\sqrt{g\,h}}">Fr = V/√(g·h)</i></span><span class="eq"><b>Joukowsky · coup de bélier</b><i data-tex="\Delta H = \dfrac{a\,\Delta V}{g}">ΔH = a·ΔV/g</i></span><span class="eq"><b>Reynolds</b><i data-tex="Re = \dfrac{V D}{\nu}">Re = V·D/ν</i></span><span class="eq"><b>Continuité</b><i data-tex="Q = V\,S">Q = V·S</i></span><span class="eq"><b>Manning-Strickler</b><i data-tex="Q = K_s\,S\,R_h^{2/3}\sqrt{I}">Q = Ks·S·Rh^(2/3)·√I</i></span><span class="eq"><b>Bernoulli</b><i data-tex="z + \dfrac{p}{\rho g} + \dfrac{V^2}{2g} = H">z + p/ρg + V²/2g = H</i></span><span class="eq"><b>Navier-Stokes</b><i data-tex="\rho\left(\dfrac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot\nabla\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \rho\mathbf{g}">ρ(∂u/∂t + u·∇u) = −∇p + μ∇²u + ρg</i></span><span class="eq"><b>Caquot</b><i data-tex="Q = k^{1/u}\,I^{v/u}\,C^{1/u}\,A^{w/u}">Q = k^(1/u)·I^(v/u)·C^(1/u)·A^(w/u)</i></span><span class="eq"><b>Saint-Venant</b><i data-tex="\dfrac{\partial A}{\partial t} + \dfrac{\partial Q}{\partial x} = 0">∂A/∂t + ∂Q/∂x = 0</i></span><span class="eq"><b>Darcy-Weisbach</b><i data-tex="\Delta H = \lambda\,\dfrac{L}{D}\,\dfrac{V^2}{2g}">ΔH = λ·(L/D)·V²/2g</i></span><span class="eq"><b>Froude</b><i data-tex="Fr = \dfrac{V}{\sqrt{g\,h}}">Fr = V/√(g·h)</i></span><span class="eq"><b>Joukowsky · coup de bélier</b><i data-tex="\Delta H = \dfrac{a\,\Delta V}{g}">ΔH = a·ΔV/g</i></span><span class="eq"><b>Reynolds</b><i data-tex="Re = \dfrac{V D}{\nu}">Re = V·D/ν</i></span><span class="eq"><b>Continuité</b><i data-tex="Q = V\,S">Q = V·S</i></span></div></div>
-
     <div class="wave-divider" aria-hidden="true">
         <svg class="wave-back" viewBox="0 0 2400 60" preserveAspectRatio="none">
             <path fill="#16c9ed" opacity="0.35"
