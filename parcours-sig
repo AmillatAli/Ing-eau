@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#032f56">
+    <title>Parcours SIG avancée — INGÉEAU</title>
+    <meta name="description" content="Parcours SIG avancée INGÉEAU : collecter, analyser et automatiser l’information géographique, du géoréférencement à la programmation SIG. Pour les professionnels, élèves ingénieurs et techniciens.">
+    <link rel="icon" type="image/png" href="images/ingeeau-logo.png">
+    <style>
+        :root {
+            --blue-dark: #032f56;
+            --cyan: #16c9ed;
+            --text-dark: #172f45;
+            --shadow: 0 10px 30px rgba(0,45,80,.12);
+            --radius: 22px;
+            --accent: #0f9d9a;
+            --accent-light: #e4f6f5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text-dark);
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+        .icon {
+            width: 24px; height: 24px;
+            fill: none; stroke: currentColor; stroke-width: 1.7;
+            stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* ===== HERO ===== */
+        .page-hero {
+            position: relative; color: white;
+            padding: 25px 20px 80px;
+            background:
+                linear-gradient(120deg, rgba(1,43,79,.95) 0%, rgba(2,73,117,.88) 55%, rgba(15,157,154,.55) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='520' viewBox='0 0 900 520'%3E%3Cg fill='none' stroke='white' stroke-opacity='.16' stroke-width='1.6'%3E%3Cellipse cx='700' cy='190' rx='30' ry='18' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='58' ry='35' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='86' ry='52' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='114' ry='69' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='142' ry='86' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='170' ry='103' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='198' ry='120' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='226' ry='137' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='170' cy='360' rx='25' ry='14' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='55' ry='29' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='85' ry='44' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='115' ry='59' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='145' ry='74' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='175' ry='89' transform='rotate%2815 170 360%29'/%3E%3Cpath d='M0 60 C200 20 380 110 560 60 S800 10 900 70'/%3E%3Cpath d='M0 115 C200 75 380 165 560 115 S800 65 900 125'/%3E%3Cpath d='M0 170 C200 130 380 220 560 170 S800 120 900 180'/%3E%3Cpath d='M0 225 C200 185 380 275 560 225 S800 175 900 235'/%3E%3Cpath d='M0 280 C200 240 380 330 560 280 S800 230 900 290'/%3E%3Cpath d='M0 335 C200 295 380 385 560 335 S800 285 900 345'/%3E%3Cpath d='M0 390 C200 350 380 440 560 390 S800 340 900 400'/%3E%3Cpath d='M0 445 C200 405 380 495 560 445 S800 395 900 455'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover; background-position: center; overflow: hidden;
+        }
+
+        .page-hero::after {
+            content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
+            height: 60px; background: #fff;
+            clip-path: ellipse(75% 100% at 50% 100%); z-index: 1;
+        }
+
+        .page-hero .container {
+            max-width: 1200px; margin: auto;
+            position: relative; z-index: 2;
+        }
+
+        .page-hero nav {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 55px; flex-wrap: wrap; gap: 15px;
+        }
+
+        .page-hero .logo {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 36px; font-weight: 900; letter-spacing: -1.5px;
+        }
+
+        .page-hero .logo-icon { width: 42px; height: 42px; }
+        .page-hero .logo .inge { color: white; }
+        .page-hero .logo .eau { color: var(--cyan); }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: rgba(255,255,255,.85); font-weight: bold; font-size: 15px;
+            transition: color .3s;
+        }
+        .back-link:hover { color: var(--cyan); }
+        .back-link .icon { width: 18px; height: 18px; }
+
+        .hero-body {
+            display: grid; grid-template-columns: 1.25fr .75fr;
+            gap: 45px; align-items: center;
+        }
+
+        .tag {
+            display: inline-block; padding: 6px 14px;
+            border-radius: 30px; background: var(--accent); color: white;
+            font-size: 12px; font-weight: 900; letter-spacing: .1em;
+            text-transform: uppercase; margin-bottom: 16px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.05; margin-bottom: 14px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 20px; font-style: italic;
+            color: rgba(255,255,255,.85);
+            margin-bottom: 28px; max-width: 560px;
+        }
+
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        .btn-primary, .btn-outline {
+            display: inline-block; padding: 14px 26px;
+            border-radius: 50px; font-weight: 900; font-size: 15px; transition: .3s;
+        }
+
+        .btn-primary { background: var(--cyan); color: var(--blue-dark); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(22,201,237,.4); }
+        .btn-outline { border: 2px solid white; color: white; }
+        .btn-outline:hover { background: white; color: var(--blue-dark); }
+
+        .fiche {
+            background: rgba(2,47,82,.85);
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 24px; padding: 28px 26px;
+            backdrop-filter: blur(8px); box-shadow: var(--shadow);
+        }
+
+        .fiche h2 {
+            font-size: 18px; color: var(--cyan);
+            margin-bottom: 16px; text-transform: uppercase; letter-spacing: .08em;
+        }
+
+        .fiche ul { list-style: none; }
+
+        .fiche li {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-top: 1px solid rgba(255,255,255,.12);
+            font-size: 15px; gap: 12px;
+        }
+
+        .fiche li:first-child { border-top: none; }
+        .fiche li span { color: rgba(255,255,255,.7); }
+        .fiche li strong { color: white; text-align: right; }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 75px 20px; }
+        .container { max-width: 1200px; margin: auto; }
+
+        .section-title { text-align: center; margin-bottom: 45px; }
+        .section-title h2 { font-size: 36px; color: var(--blue-dark); margin-bottom: 10px; }
+        .section-title p { color: #60778a; font-size: 18px; max-width: 750px; margin: auto; }
+
+        /* ===== INTRO ===== */
+        .intro-grid {
+            display: grid; grid-template-columns: 1.2fr .8fr;
+            gap: 45px; align-items: center;
+        }
+
+        .intro-text p { font-size: 17px; margin-bottom: 18px; color: #3f5568; }
+        .intro-text strong { color: var(--blue-dark); }
+
+        .intro-image {
+            min-height: 340px; border-radius: var(--radius);
+            background-color: var(--accent);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='520' viewBox='0 0 900 520'%3E%3Cg fill='none' stroke='white' stroke-opacity='.16' stroke-width='1.6'%3E%3Cellipse cx='700' cy='190' rx='30' ry='18' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='58' ry='35' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='86' ry='52' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='114' ry='69' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='142' ry='86' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='170' ry='103' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='198' ry='120' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='700' cy='190' rx='226' ry='137' transform='rotate%28-20 700 190%29'/%3E%3Cellipse cx='170' cy='360' rx='25' ry='14' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='55' ry='29' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='85' ry='44' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='115' ry='59' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='145' ry='74' transform='rotate%2815 170 360%29'/%3E%3Cellipse cx='170' cy='360' rx='175' ry='89' transform='rotate%2815 170 360%29'/%3E%3Cpath d='M0 60 C200 20 380 110 560 60 S800 10 900 70'/%3E%3Cpath d='M0 115 C200 75 380 165 560 115 S800 65 900 125'/%3E%3Cpath d='M0 170 C200 130 380 220 560 170 S800 120 900 180'/%3E%3Cpath d='M0 225 C200 185 380 275 560 225 S800 175 900 235'/%3E%3Cpath d='M0 280 C200 240 380 330 560 280 S800 230 900 290'/%3E%3Cpath d='M0 335 C200 295 380 385 560 335 S800 285 900 345'/%3E%3Cpath d='M0 390 C200 350 380 440 560 390 S800 340 900 400'/%3E%3Cpath d='M0 445 C200 405 380 495 560 445 S800 395 900 455'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover; background-position: center;
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== PROGRAMME ===== */
+        #programme { background: #f7fbfd; }
+
+        .modules { display: grid; gap: 18px; }
+
+        .module {
+            background: white; border-radius: 16px; padding: 26px 30px;
+            box-shadow: 0 4px 16px rgba(0,45,80,.07);
+            display: grid; grid-template-columns: 56px 1fr;
+            gap: 22px; align-items: flex-start;
+            transition: box-shadow .3s, transform .3s;
+        }
+
+        .module:hover {
+            box-shadow: 0 10px 30px rgba(0,45,80,.13);
+            transform: translateY(-2px);
+        }
+
+        .module-number {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--accent); color: white;
+            font-weight: 900; font-size: 22px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .module h3 { font-size: 21px; color: var(--blue-dark); margin-bottom: 8px; }
+
+        .module-hours {
+            display: inline-block; font-size: 13px; font-weight: 900;
+            color: var(--accent); background: var(--accent-light);
+            padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
+        }
+
+        .module p { font-size: 15px; color: #4a6172; }
+        .module ul { margin-top: 12px; padding-left: 18px; font-size: 15px; color: #4a6172; }
+        .module ul li { margin-bottom: 5px; }
+
+        /* ===== CTA ===== */
+        .cta-section { text-align: center; padding: 65px 20px; }
+        .cta-section h2 { font-size: 32px; color: var(--blue-dark); margin-bottom: 12px; }
+        .cta-section p { font-size: 18px; color: #60778a; margin-bottom: 28px; }
+
+        .btn-cta {
+            display: inline-block; padding: 16px 34px;
+            border-radius: 50px; background: var(--accent); color: white;
+            font-weight: 900; font-size: 17px; transition: .3s;
+        }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,60,110,.3); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #021e38; color: #a9c4d8;
+            text-align: center; padding: 25px; font-size: 14px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width: 900px) {
+            .hero-body { grid-template-columns: 1fr; }
+            .intro-grid { grid-template-columns: 1fr; }
+            .intro-image { min-height: 220px; order: -1; }
+        }
+
+        @media(max-width: 600px) {
+            .page-hero { padding: 20px 15px 60px; }
+            .page-hero .logo { font-size: 28px; }
+            .page-hero .logo-icon { width: 36px; height: 36px; }
+            .page-hero nav { margin-bottom: 35px; }
+            section { padding: 55px 15px; }
+            .section-title h2 { font-size: 28px; }
+            .module { grid-template-columns: 1fr; gap: 14px; padding: 22px 20px; }
+            .module-number { width: 44px; height: 44px; font-size: 18px; }
+            .module h3 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="page-hero">
+    <div class="container">
+
+        <nav>
+            <a href="index.html" class="logo" aria-label="Retour à l'accueil INGÉEAU">
+                <div class="logo-icon">
+                    <img src="images/ingeeau-logo.png" alt="Logo INGÉEAU">
+                </div>
+                <div>
+                    <span class="inge">INGÉ</span><span class="eau">EAU</span>
+                </div>
+            </a>
+
+            <a href="index.html#parcours" class="back-link">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 12H5"/>
+                    <path d="M10.5 6.5L4 12l6.5 5.5"/>
+                </svg>
+                Tous les parcours
+            </a>
+        </nav>
+
+        <div class="hero-body">
+
+            <div class="hero-text">
+                <span class="tag">Parcours</span>
+                <h1>SIG avancée</h1>
+                <p class="subtitle">
+                    Collecter, analyser et automatiser l'information géographique
+                </p>
+                <div class="hero-buttons">
+                    <a href="#programme" class="btn-primary">Voir le programme</a>
+                    <a href="index.html#contact" class="btn-outline">Nous contacter</a>
+                </div>
+            </div>
+
+            <aside class="fiche" aria-label="Fiche parcours">
+                <h2>Fiche parcours</h2>
+                <ul>
+                    <li><span>Modules</span><strong>8</strong></li>
+                    <li><span>Format</span><strong>Théorie + pratique</strong></li>
+                    <li><span>Outils</span><strong>QGIS, PostGIS, Python</strong></li>
+                    <li><span>Public</span><strong>Professionnels, élèves ingénieurs et techniciens</strong></li>
+                    <li><span>1<sup>re</sup> séance</span><strong>Gratuite</strong></li>
+                </ul>
+            </aside>
+
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- ===== INTRO ===== -->
+<section>
+    <div class="container">
+        <div class="intro-grid">
+
+            <div class="intro-text">
+                <p>
+                    Le parcours <strong>SIG avancée</strong> d'INGÉEAU vous fait passer de l'usage
+                    courant d'un SIG à une maîtrise complète de la chaîne de traitement de
+                    l'information géographique, appliquée aux métiers de l'eau.
+                </p>
+                <p>
+                    Vous apprendrez à <strong>géoréférencer et digitaliser</strong> des données,
+                    à <strong>structurer une base de données spatiale</strong>, à
+                    <strong>exploiter les modèles numériques de terrain</strong> et la
+                    <strong>télédétection</strong>, puis à produire des cartes professionnelles.
+                </p>
+                <p>
+                    Le parcours se termine par la <strong>programmation SIG</strong> : automatiser vos
+                    traitements avec Python pour gagner du temps et rendre vos analyses reproductibles.
+                </p>
+            </div>
+
+            <div class="intro-image" role="img" aria-label="Illustration du parcours SIG avancée"></div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROGRAMME ===== -->
+<section id="programme">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Programme détaillé</h2>
+            <p>8 modules progressifs, des fondamentaux du SIG à la programmation.</p>
+        </div>
+
+        <div class="modules">
+
+            <div class="module">
+                <div class="module-number">1</div>
+                <div>
+                    <h3>Les Systèmes d’Information Géographique</h3>
+                    <p>
+                        Fondations du SIG : composantes, types de données et prise en main de l’environnement de travail.
+                    </p>
+                    <ul>
+                        <li>Données vecteur et raster</li>
+                        <li>Systèmes de coordonnées et projections</li>
+                        <li>Prise en main de QGIS</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">2</div>
+                <div>
+                    <h3>Le géoréférencement</h3>
+                    <p>
+                        Positionner cartes, plans et images dans un système de coordonnées pour les exploiter dans un SIG.
+                    </p>
+                    <ul>
+                        <li>Points de contrôle et transformations</li>
+                        <li>Choix du système de projection</li>
+                        <li>Évaluation de la précision</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">3</div>
+                <div>
+                    <h3>La digitalisation</h3>
+                    <p>
+                        Numériser des objets géographiques à partir de fonds cartographiques, de plans ou d’images.
+                    </p>
+                    <ul>
+                        <li>Création de points, lignes et polygones</li>
+                        <li>Règles d’accrochage et topologie</li>
+                        <li>Saisie des attributs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">4</div>
+                <div>
+                    <h3>Les bases de données spatiales</h3>
+                    <p>
+                        Structurer, interroger et partager des données géographiques de façon fiable.
+                    </p>
+                    <ul>
+                        <li>GeoPackage et PostgreSQL/PostGIS</li>
+                        <li>Requêtes attributaires et spatiales</li>
+                        <li>Jointures et gestion des couches</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">5</div>
+                <div>
+                    <h3>La cartographie à partir des MNT</h3>
+                    <p>
+                        Exploiter les modèles numériques de terrain pour caractériser le relief et ses effets sur l’eau.
+                    </p>
+                    <ul>
+                        <li>Pente, exposition et ombrage</li>
+                        <li>Courbes de niveau et profils en long</li>
+                        <li>Extraction du réseau hydrographique et des bassins versants</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">6</div>
+                <div>
+                    <h3>Télédétection</h3>
+                    <p>
+                        Utiliser les images satellitaires pour observer et suivre le territoire et les ressources en eau.
+                    </p>
+                    <ul>
+                        <li>Acquisition d’images (Sentinel, Landsat)</li>
+                        <li>Compositions colorées et indices (NDVI, NDWI)</li>
+                        <li>Classification d’images</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">7</div>
+                <div>
+                    <h3>Mise en page</h3>
+                    <p>
+                        Produire des cartes claires et professionnelles, prêtes à intégrer dans un rapport.
+                    </p>
+                    <ul>
+                        <li>Symbologie et étiquetage</li>
+                        <li>Composition : échelle, légende, orientation</li>
+                        <li>Export en PDF et en image</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-number">8</div>
+                <div>
+                    <h3>Programmation SIG</h3>
+                    <p>
+                        Automatiser les traitements géographiques avec Python pour gagner en rapidité et en reproductibilité.
+                    </p>
+                    <ul>
+                        <li>Python dans QGIS (PyQGIS) et scripts autonomes</li>
+                        <li>Manipulation de données avec GeoPandas et rasterio</li>
+                        <li>Chaînes de traitement automatisées</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Prêt à maîtriser l'information géographique ?</h2>
+        <p>La première séance est gratuite, sans engagement.</p>
+        <a href="index.html#contact" class="btn-cta">Nous contacter</a>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <p>© <span id="year"></span> INGÉEAU — Formation &amp; ingénierie de l'eau</p>
+    <p style="margin-top:5px;">« De la théorie à la pratique »</p>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
