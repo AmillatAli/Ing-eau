@@ -17,7 +17,7 @@
     <meta property="og:locale" content="fr_FR">
 
     <!-- Favicon: the INGÉEAU droplet mark -->
-    <link rel="icon" type="image/png" href="images/ingeeau-logoo.png">
+    <link rel="icon" type="image/png" href="images/ingeeau-logo.png">
 
     <style>
 
@@ -698,6 +698,22 @@
             background: var(--purple);
         }
 
+        /* SIG AVANCÉE */
+
+        .sig {
+            border-left: 8px solid #0f9d9a;
+        }
+
+        .sig .course-title,
+        .sig .course-cta {
+            color: #0f9d9a;
+        }
+
+        .sig .hours,
+        .sig .course-list li::before {
+            background: #0f9d9a;
+        }
+
         .course-image {
             min-height: 100%;
             position: relative;
@@ -719,6 +735,11 @@
         .hydroinfo .course-image {
             background-color: var(--purple);
             background-image: url("images/Hydroinformatique.png");
+        }
+
+        .sig .course-image {
+            background-color: #0f9d9a;
+            background-image: url("images/SIG.jpg");
         }
 
 
@@ -1510,6 +1531,78 @@
                 </div>
 
                 <div class="course-image" role="img" aria-label="Illustration du parcours hydroinformatique"></div>
+
+            </a>
+
+
+            <!-- SIG AVANCÉE -->
+
+            <a class="course sig"
+               href="parcours-sig.html"
+               aria-label="Parcours SIG avancée — voir le programme détaillé">
+
+                <div class="course-content">
+
+                    <div class="course-header">
+
+                        <div class="course-title">
+                            PARCOURS SIG AVANCÉE
+                        </div>
+
+                        <div class="hours">
+                            QGIS · Python
+                        </div>
+
+                    </div>
+
+                    <div class="course-description">
+                        Collecter, analyser et automatiser
+                        l’information géographique
+                    </div>
+
+                    <ol class="course-list">
+
+                        <li>
+                            Les Systèmes d’Information Géographique
+                        </li>
+
+                        <li>
+                            Le géoréférencement
+                        </li>
+
+                        <li>
+                            La digitalisation
+                        </li>
+
+                        <li>
+                            Les bases de données spatiales
+                        </li>
+
+                        <li>
+                            La cartographie à partir des MNT
+                        </li>
+
+                        <li>
+                            Mise en page
+                        </li>
+
+                        <li>
+                            Programmation SIG
+                        </li>
+
+                    </ol>
+
+                    <span class="course-cta">
+                        Découvrir le programme
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 12h15"/>
+                            <path d="M13.5 6.5L20 12l-6.5 5.5"/>
+                        </svg>
+                    </span>
+
+                </div>
+
+                <div class="course-image" role="img" aria-label="Illustration du parcours SIG avancée"></div>
 
             </a>
 
